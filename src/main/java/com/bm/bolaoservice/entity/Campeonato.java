@@ -22,10 +22,13 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @SequenceGenerator(name = "CAM_SEQ", sequenceName = "CAMPEONATO_SEQ", allocationSize = 1, initialValue = 1)
-public class Campeonato implements AbstractEntity{
-    
+public class Campeonato implements AbstractEntity {
+
+    private static final long serialVersionUID = -542156336692445325L;
+
     @Id
-    @GeneratedValue(generator = "CAM_SEQ",strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(generator = "CAM_SEQ", strategy = GenerationType.SEQUENCE)
+    @Column(name = "ID_CAMPEONATO")
     private Long id;
     private String nome;
     @Column(name = "QTD_TIME")
@@ -84,6 +87,5 @@ public class Campeonato implements AbstractEntity{
     public void setStatus(String status) {
         this.status = status;
     }
-    
-    
+
 }
