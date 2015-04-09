@@ -32,10 +32,12 @@ public class Partida implements AbstractEntity {
     private String fase;
     private String tipo;
     @Temporal(TemporalType.DATE)
-    private Date data;
+    @Column(name = "DATA_APOSTA")
+    private Date dataAposta;
     private String local;
     private String status;
 
+    @Override
     public Long getId() {
         return id;
     }
@@ -60,12 +62,12 @@ public class Partida implements AbstractEntity {
         this.tipo = tipo;
     }
 
-    public Date getData() {
-        return data;
+    public Date getDataAposta() {
+        return dataAposta;
     }
 
-    public void setData(Date data) {
-        this.data = data;
+    public void setDataAposta(Date dataAposta) {
+        this.dataAposta = dataAposta;
     }
 
     public String getLocal() {

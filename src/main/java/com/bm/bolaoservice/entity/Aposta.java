@@ -31,8 +31,10 @@ public class Aposta implements AbstractEntity {
     @Column(name = "ID_APOSTA")
     private Long id;
     @Temporal(TemporalType.DATE)
-    private Date data;
+    @Column(name = "DATA_APOSTA")
+    private Date dataAposta;
 
+    @Override
     public Long getId() {
         return id;
     }
@@ -41,12 +43,12 @@ public class Aposta implements AbstractEntity {
         this.id = id;
     }
 
-    public Date getData() {
-        return data;
+    public Date getDataAposta() {
+        return dataAposta;
     }
 
-    public void setData(Date data) {
-        this.data = data;
+    public void setDataAposta(Date dataAposta) {
+        this.dataAposta = dataAposta;
     }
 
 }

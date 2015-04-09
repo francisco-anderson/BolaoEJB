@@ -29,6 +29,7 @@ public class Regra implements AbstractEntity {
     private String nome;
     private int pontos;
 
+    @Override
     public Long getId() {
         return id;
     }

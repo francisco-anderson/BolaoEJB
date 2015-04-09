@@ -28,6 +28,7 @@ public class Pontuacao implements AbstractEntity {
     private Long id;
     private int pontos;
 
+    @Override
     public Long getId() {
         return id;
     }
