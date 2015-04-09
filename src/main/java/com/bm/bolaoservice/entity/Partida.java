@@ -11,6 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -32,10 +34,14 @@ public class Partida implements AbstractEntity {
     private String fase;
     private String tipo;
     @Temporal(TemporalType.DATE)
-    @Column(name = "DATA_APOSTA")
-    private Date dataAposta;
-    private String local;
+    @Column(name = "DATA_PARTIDA")
+    private Date dataPartida;
+    @Column(name = "LOCAL_PARTIDA")
+    private String localPartida;
     private String status;
+    @OneToMany
+    @JoinColumn(name = "ID_PARTIDA")
+    private EquipePartida equipePartida;
 
     @Override
     public Long getId() {
@@ -62,20 +68,20 @@ public class Partida implements AbstractEntity {
         this.tipo = tipo;
     }
 
-    public Date getDataAposta() {
-        return dataAposta;
+    public Date getDataPartida() {
+        return dataPartida;
     }
 
-    public void setDataAposta(Date dataAposta) {
-        this.dataAposta = dataAposta;
+    public void setDataPartida(Date dataPartida) {
+        this.dataPartida = dataPartida;
     }
 
-    public String getLocal() {
-        return local;
+    public String getLocalPartida() {
+        return localPartida;
     }
 
-    public void setLocal(String local) {
-        this.local = local;
+    public void setLocalPartida(String localPartida) {
+        this.localPartida = localPartida;
     }
 
     public String getStatus() {
@@ -84,6 +90,14 @@ public class Partida implements AbstractEntity {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public EquipePartida getEquipePartida() {
+        return equipePartida;
+    }
+
+    public void setEquipePartida(EquipePartida equipePartida) {
+        this.equipePartida = equipePartida;
     }
     
 

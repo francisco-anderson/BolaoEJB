@@ -6,12 +6,17 @@
 package com.bm.bolaoservice.entity;
 
 import java.util.Date;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -31,13 +36,19 @@ public class Campeonato implements AbstractEntity {
     @Column(name = "ID_CAMPEONATO")
     private Long id;
     private String nome;
-    @Column(name = "QTD_TIME")
-    private int qtdTime;
+    @Column(name = "QTD_EQUIPE")
+    private int qtdEquipe;
     @Temporal(TemporalType.DATE)
     private Date dataInicio;
     @Temporal(TemporalType.DATE)
     private Date dataFinal;
-    private String status;
+    private String status;    
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @JoinColumn(name = "ID_CAMPEONATO")
+    private List<Pontuacao> pontuacoes;
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID_CAMPEONATO")
+    private List<Regra> regras;
 
     @Override
     public Long getId() {
@@ -56,12 +67,12 @@ public class Campeonato implements AbstractEntity {
         this.nome = nome;
     }
 
-    public int getQtdTime() {
-        return qtdTime;
+    public int getQtdEquipe() {
+        return qtdEquipe;
     }
 
-    public void setQtdTime(int qtdTime) {
-        this.qtdTime = qtdTime;
+    public void setQtdEquipe(int qtdEquipe) {
+        this.qtdEquipe = qtdEquipe;
     }
 
     public Date getDataInicio() {
@@ -86,6 +97,22 @@ public class Campeonato implements AbstractEntity {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public List<Pontuacao> getPontuacoes() {
+        return pontuacoes;
+    }
+
+    public void setPontuacoes(List<Pontuacao> pontuacoes) {
+        this.pontuacoes = pontuacoes;
+    }
+
+    public List<Regra> getRegras() {
+        return regras;
+    }
+
+    public void setRegras(List<Regra> regras) {
+        this.regras = regras;
     }
 
 }

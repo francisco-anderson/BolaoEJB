@@ -6,12 +6,17 @@
 package com.bm.bolaoservice.entity;
 
 import java.util.Date;
+import java.util.List;
 import javax.annotation.Generated;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -33,6 +38,11 @@ public class Aposta implements AbstractEntity {
     @Temporal(TemporalType.DATE)
     @Column(name = "DATA_APOSTA")
     private Date dataAposta;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "USUARIO_APOSTA",
+                joinColumns = @JoinColumn(name = "ID_APOSTA"),
+                inverseJoinColumns = @JoinColumn(name = "ID_USUARIO"))
+    private List<Usuario> usuarios;
 
     @Override
     public Long getId() {
@@ -49,6 +59,14 @@ public class Aposta implements AbstractEntity {
 
     public void setDataAposta(Date dataAposta) {
         this.dataAposta = dataAposta;
+    }
+
+    public List<Usuario> getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(List<Usuario> usuarios) {
+        this.usuarios = usuarios;
     }
 
 }

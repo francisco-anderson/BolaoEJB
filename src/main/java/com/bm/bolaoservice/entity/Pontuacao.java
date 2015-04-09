@@ -5,11 +5,13 @@
  */
 package com.bm.bolaoservice.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
 /**
@@ -27,6 +29,10 @@ public class Pontuacao implements AbstractEntity {
     @Column(name = "ID_PONTUACAO")
     private Long id;
     private int pontos;
+    @ManyToOne(cascade = CascadeType.REFRESH)
+    private Usuario usuario;
+    @ManyToOne(cascade = CascadeType.REFRESH)
+    private Campeonato campeonato;
 
     @Override
     public Long getId() {
@@ -43,5 +49,21 @@ public class Pontuacao implements AbstractEntity {
 
     public void setPontos(int pontos) {
         this.pontos = pontos;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public Campeonato getCampeonato() {
+        return campeonato;
+    }
+
+    public void setCampeonato(Campeonato campeonato) {
+        this.campeonato = campeonato;
     }
 }
