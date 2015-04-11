@@ -15,19 +15,21 @@ import javax.persistence.Table;
  *
  * @author Anderson
  */
-@Table(name = "EQUIPE_PARTIDA")
-public class EquipePartida implements Serializable{
+@Table(name = "APOSTA_EQUIPE_PARTIDA")
+public class ApostaEquipePartida implements Serializable {
 
-    private static final long serialVersionUID = -3182922397635831126L;
+    private static final long serialVersionUID = -5508100380517081748L;
 
     @Column(name = "GOLS")
     private int gol;
     @Column(name = "GOLS_PENALTI")
-    private int golPenati;
+    private int golPenalti;
     @ManyToOne(cascade = CascadeType.REFRESH)
     private Equipe equipe;
     @ManyToOne(cascade = CascadeType.REFRESH)
     private Partida partida;
+    @ManyToOne(cascade = CascadeType.REFRESH)
+    private Aposta aposta;
 
     public int getGol() {
         return gol;
@@ -37,12 +39,12 @@ public class EquipePartida implements Serializable{
         this.gol = gol;
     }
 
-    public int getGolPenati() {
-        return golPenati;
+    public int getGolPenalti() {
+        return golPenalti;
     }
 
-    public void setGolPenati(int golPenati) {
-        this.golPenati = golPenati;
+    public void setGolPenalti(int golPenalti) {
+        this.golPenalti = golPenalti;
     }
 
     public Equipe getEquipe() {
@@ -61,6 +63,13 @@ public class EquipePartida implements Serializable{
         this.partida = partida;
     }
 
- 
+    public Aposta getAposta() {
+        return aposta;
+    }
+
+    public void setAposta(Aposta aposta) {
+        this.aposta = aposta;
+    }
+   
 
 }

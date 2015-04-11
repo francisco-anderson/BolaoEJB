@@ -6,8 +6,10 @@
 package com.bm.bolaoservice.entity;
 
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -42,6 +44,9 @@ public class Partida implements AbstractEntity {
     @OneToMany
     @JoinColumn(name = "ID_PARTIDA")
     private EquipePartida equipePartida;
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID_PARTIDA")
+    private ApostaEquipePartida apostaEquipePartida;
 
     @Override
     public Long getId() {
@@ -98,6 +103,14 @@ public class Partida implements AbstractEntity {
 
     public void setEquipePartida(EquipePartida equipePartida) {
         this.equipePartida = equipePartida;
+    }
+
+    public ApostaEquipePartida getApostaEquipePartida() {
+        return apostaEquipePartida;
+    }
+
+    public void setApostaEquipePartida(ApostaEquipePartida apostaEquipePartida) {
+        this.apostaEquipePartida = apostaEquipePartida;
     }
     
 

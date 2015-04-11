@@ -11,12 +11,14 @@ import javax.annotation.Generated;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -43,6 +45,9 @@ public class Aposta implements AbstractEntity {
                 joinColumns = @JoinColumn(name = "ID_APOSTA"),
                 inverseJoinColumns = @JoinColumn(name = "ID_USUARIO"))
     private List<Usuario> usuarios;
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID_APOSTA")
+    private ApostaEquipePartida apostaEquipePartida;
 
     @Override
     public Long getId() {
@@ -67,6 +72,14 @@ public class Aposta implements AbstractEntity {
 
     public void setUsuarios(List<Usuario> usuarios) {
         this.usuarios = usuarios;
+    }
+
+    public ApostaEquipePartida getApostaEquipePartida() {
+        return apostaEquipePartida;
+    }
+
+    public void setApostaEquipePartida(ApostaEquipePartida apostaEquipePartida) {
+        this.apostaEquipePartida = apostaEquipePartida;
     }
 
 }

@@ -22,6 +22,7 @@ import javax.persistence.SequenceGenerator;
 @Entity
 @SequenceGenerator(allocationSize=1, initialValue= 1, name="TIME_SEQ", sequenceName="TIME_SEQ")
 public class Equipe implements AbstractEntity{
+    private static final long serialVersionUID = -5667197242867752204L;
     
     @Id
     @GeneratedValue(generator="TIME_SEQ",strategy= GenerationType.SEQUENCE)
@@ -31,6 +32,9 @@ public class Equipe implements AbstractEntity{
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_EQUIPE")
     private EquipePartida equipePartida;
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID_EQUIPE")
+    private ApostaEquipePartida apostaEquipePartida;
 
     @Override
     public Long getId() {
@@ -55,6 +59,14 @@ public class Equipe implements AbstractEntity{
 
     public void setEquipePartida(EquipePartida equipePartida) {
         this.equipePartida = equipePartida;
+    }
+
+    public void setApostaEquipePartida(ApostaEquipePartida apostaEquipePartida) {
+        this.apostaEquipePartida = apostaEquipePartida;
+    }
+
+    public ApostaEquipePartida getApostaEquipePartida() {
+        return apostaEquipePartida;
     }
     
 }
