@@ -7,17 +7,17 @@ package com.bm.bolaoservice.entity;
 
 import java.util.Date;
 import java.util.List;
-import javax.annotation.Generated;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
@@ -29,10 +29,14 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @SequenceGenerator(allocationSize = 1, initialValue = 1, name = "APO_SEQ", sequenceName = "APOSTA_SEQ")
+@NamedQueries({
+    @NamedQuery(name = "Aposta.findAll", query = "SELECT a FROM Aposta a"),
+    @NamedQuery(name = "Aposta.findByIdAposta", query = "SELECT a FROM Aposta a WHERE a.id = :idAposta"),
+    @NamedQuery(name = "Aposta.findByDataAposta", query = "SELECT a FROM Aposta a WHERE a.dataAposta = :dataAposta")})
 public class Aposta implements AbstractEntity {
 
     private static final long serialVersionUID = 3858559331989964654L;
-    
+
     @Id
     @GeneratedValue(generator = "APO_SEQ", strategy = GenerationType.SEQUENCE)
     @Column(name = "ID_APOSTA")
@@ -42,12 +46,11 @@ public class Aposta implements AbstractEntity {
     private Date dataAposta;
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "USUARIO_APOSTA",
-                joinColumns = @JoinColumn(name = "ID_APOSTA"),
-                inverseJoinColumns = @JoinColumn(name = "ID_USUARIO"))
+            joinColumns = @JoinColumn(name = "ID_APOSTA"),
+            inverseJoinColumns = @JoinColumn(name = "ID_USUARIO"))
     private List<Usuario> usuarios;
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JoinColumn(name = "ID_APOSTA")
-    private ApostaEquipePartida apostaEquipePartida;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "aposta")
+    private List<ApostaEquipePartida> apostaEquipePartidaList;
 
     @Override
     public Long getId() {
@@ -74,12 +77,14 @@ public class Aposta implements AbstractEntity {
         this.usuarios = usuarios;
     }
 
-    public ApostaEquipePartida getApostaEquipePartida() {
-        return apostaEquipePartida;
+    public List<ApostaEquipePartida> getApostaEquipePartidaList() {
+        return apostaEquipePartidaList;
     }
 
-    public void setApostaEquipePartida(ApostaEquipePartida apostaEquipePartida) {
-        this.apostaEquipePartida = apostaEquipePartida;
+    public void setApostaEquipePartidaList(List<ApostaEquipePartida> apostaEquipePartidaList) {
+        this.apostaEquipePartidaList = apostaEquipePartidaList;
     }
+
+ 
 
 }

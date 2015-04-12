@@ -7,15 +7,15 @@ package com.bm.bolaoservice.entity;
 
 import java.util.Date;
 import java.util.List;
-import javax.persistence.CascadeType;
-import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
@@ -27,6 +27,14 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @SequenceGenerator(name = "CAM_SEQ", sequenceName = "CAMPEONATO_SEQ", allocationSize = 1, initialValue = 1)
+@NamedQueries({
+    @NamedQuery(name = "Campeonato.findAll", query = "SELECT c FROM Campeonato c"),
+    @NamedQuery(name = "Campeonato.findByIdCampeonato", query = "SELECT c FROM Campeonato c WHERE c.id = :idCampeonato"),
+    @NamedQuery(name = "Campeonato.findByNome", query = "SELECT c FROM Campeonato c WHERE c.nome = :nome"),
+    @NamedQuery(name = "Campeonato.findByQtdEquipe", query = "SELECT c FROM Campeonato c WHERE c.qtdEquipe = :qtdEquipe"),
+    @NamedQuery(name = "Campeonato.findByDatainicio", query = "SELECT c FROM Campeonato c WHERE c.dataInicio = :datainicio"),
+    @NamedQuery(name = "Campeonato.findByDatafinal", query = "SELECT c FROM Campeonato c WHERE c.dataFinal = :datafinal"),
+    @NamedQuery(name = "Campeonato.findByStatus", query = "SELECT c FROM Campeonato c WHERE c.status = :status")})
 public class Campeonato implements AbstractEntity {
 
     private static final long serialVersionUID = -542156336692445325L;
@@ -42,13 +50,16 @@ public class Campeonato implements AbstractEntity {
     private Date dataInicio;
     @Temporal(TemporalType.DATE)
     private Date dataFinal;
-    private String status;    
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    @JoinColumn(name = "ID_CAMPEONATO")
-    private List<Pontuacao> pontuacoes;
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JoinColumn(name = "ID_CAMPEONATO")
-    private List<Regra> regras;
+    private String status;
+    @OneToMany(mappedBy = "campeonato")
+    private List<Pontuacao> pontuacaoList;
+    @OneToMany(mappedBy = "campeonato")
+    private List<Regra> regraList;
+    @ManyToOne
+    @JoinColumn(name = "ID_USUARIO", referencedColumnName = "ID_USUARIO")
+    private Usuario usuario;
+    @OneToMany(mappedBy = "campeonato")
+    private List<Partida> partidaList;
 
     @Override
     public Long getId() {
@@ -99,20 +110,36 @@ public class Campeonato implements AbstractEntity {
         this.status = status;
     }
 
-    public List<Pontuacao> getPontuacoes() {
-        return pontuacoes;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setPontuacoes(List<Pontuacao> pontuacoes) {
-        this.pontuacoes = pontuacoes;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
-    public List<Regra> getRegras() {
-        return regras;
+    public List<Pontuacao> getPontuacaoList() {
+        return pontuacaoList;
     }
 
-    public void setRegras(List<Regra> regras) {
-        this.regras = regras;
+    public void setPontuacaoList(List<Pontuacao> pontuacaoList) {
+        this.pontuacaoList = pontuacaoList;
+    }
+
+    public List<Regra> getRegraList() {
+        return regraList;
+    }
+
+    public void setRegraList(List<Regra> regraList) {
+        this.regraList = regraList;
+    }
+
+    public List<Partida> getPartidaList() {
+        return partidaList;
+    }
+
+    public void setPartidaList(List<Partida> partidaList) {
+        this.partidaList = partidaList;
     }
 
 }

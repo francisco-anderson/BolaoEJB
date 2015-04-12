@@ -15,6 +15,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
@@ -24,6 +26,11 @@ import javax.persistence.SequenceGenerator;
  */
 @Entity
 @SequenceGenerator(name = "USU_SEQ", sequenceName = "USUARIO_SEQ", allocationSize = 1, initialValue = 1)
+@NamedQueries({
+    @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u"),
+    @NamedQuery(name = "Usuario.findByIdUsuario", query = "SELECT u FROM Usuario u WHERE u.id = :idUsuario"),
+    @NamedQuery(name = "Usuario.findByNome", query = "SELECT u FROM Usuario u WHERE u.nome = :nome"),
+    @NamedQuery(name = "Usuario.findByEmail", query = "SELECT u FROM Usuario u WHERE u.email = :email"),})
 public class Usuario implements AbstractEntity {
 
     private static final long serialVersionUID = 1799676888636233241L;
@@ -36,15 +43,13 @@ public class Usuario implements AbstractEntity {
     private String email;
     private String senha;
     @ManyToMany(mappedBy = "usuarios", cascade = CascadeType.ALL)
-    private List<Aposta> apostas;    
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    @JoinColumn(name = "ID_USUARIO")
-    private List<Pontuacao> pontuacoes;
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Campeonato> campeonatos;
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JoinColumn(name = "ID_USUARIO")
-    private List<Equipe> equipes;
+    private List<Aposta> apostas;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
+    private List<Pontuacao> pontuacaoList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
+    private List<Campeonato> campeonatoList;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "usuario")
+    private List<Equipe> equipeList;
 
     @Override
     public Long getId() {
@@ -87,28 +92,28 @@ public class Usuario implements AbstractEntity {
         this.apostas = apostas;
     }
 
-    public List<Pontuacao> getPontuacoes() {
-        return pontuacoes;
+    public List<Pontuacao> getPontuacaoList() {
+        return pontuacaoList;
     }
 
-    public void setPontuacoes(List<Pontuacao> pontuacoes) {
-        this.pontuacoes = pontuacoes;
+    public void setPontuacaoList(List<Pontuacao> pontuacaoList) {
+        this.pontuacaoList = pontuacaoList;
     }
 
-    public List<Campeonato> getCampeonatos() {
-        return campeonatos;
+    public List<Campeonato> getCampeonatoList() {
+        return campeonatoList;
     }
 
-    public void setCampeonatos(List<Campeonato> campeonatos) {
-        this.campeonatos = campeonatos;
+    public void setCampeonatoList(List<Campeonato> campeonatoList) {
+        this.campeonatoList = campeonatoList;
     }
 
-    public List<Equipe> getEquipes() {
-        return equipes;
+    public List<Equipe> getEquipeList() {
+        return equipeList;
     }
 
-    public void setEquipes(List<Equipe> equipes) {
-        this.equipes = equipes;
+    public void setEquipeList(List<Equipe> equipeList) {
+        this.equipeList = equipeList;
     }
 
 }

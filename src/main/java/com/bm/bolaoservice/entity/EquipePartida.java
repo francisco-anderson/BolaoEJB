@@ -6,9 +6,13 @@
 package com.bm.bolaoservice.entity;
 
 import java.io.Serializable;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
@@ -16,18 +20,48 @@ import javax.persistence.Table;
  * @author Anderson
  */
 @Table(name = "EQUIPE_PARTIDA")
-public class EquipePartida implements Serializable{
+@Entity
+@NamedQueries({
+    @NamedQuery(name = "EquipePartida.findAll", query = "SELECT e FROM EquipePartida e"),
+    @NamedQuery(name = "EquipePartida.findByGols", query = "SELECT e FROM EquipePartida e WHERE e.gol = :gols"),
+    @NamedQuery(name = "EquipePartida.findByGolsPenalti", query = "SELECT e FROM EquipePartida e WHERE e.golPenalti = :golsPenalti"),
+    @NamedQuery(name = "EquipePartida.findByIdEquipe", query = "SELECT e FROM EquipePartida e WHERE e.equipePartidaPK.idEquipe = :idEquipe"),
+    @NamedQuery(name = "EquipePartida.findByIdPartida", query = "SELECT e FROM EquipePartida e WHERE e.equipePartidaPK.idPartida = :idPartida")})
+public class EquipePartida implements Serializable {
 
     private static final long serialVersionUID = -3182922397635831126L;
 
+    @EmbeddedId
+    protected EquipePartidaPK equipePartidaPK;
     @Column(name = "GOLS")
     private int gol;
     @Column(name = "GOLS_PENALTI")
-    private int golPenati;
-    @ManyToOne(cascade = CascadeType.REFRESH)
+    private int golPenalti;
+    @JoinColumn(name = "ID_EQUIPE", referencedColumnName = "ID_EQUIPE", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
     private Equipe equipe;
-    @ManyToOne(cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "ID_PARTIDA", referencedColumnName = "ID_PARTIDA", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
     private Partida partida;
+
+    public EquipePartida() {
+    }
+
+    public EquipePartida(EquipePartidaPK equipePartidaPK) {
+        this.equipePartidaPK = equipePartidaPK;
+    }
+
+    public EquipePartida(Long idEquipe, Long idPartida) {
+        this.equipePartidaPK = new EquipePartidaPK(idEquipe, idPartida);
+    }
+
+    public EquipePartidaPK getEquipePartidaPK() {
+        return equipePartidaPK;
+    }
+
+    public void setEquipePartidaPK(EquipePartidaPK equipePartidaPK) {
+        this.equipePartidaPK = equipePartidaPK;
+    }
 
     public int getGol() {
         return gol;
@@ -37,12 +71,12 @@ public class EquipePartida implements Serializable{
         this.gol = gol;
     }
 
-    public int getGolPenati() {
-        return golPenati;
+    public int getGolPenalti() {
+        return golPenalti;
     }
 
-    public void setGolPenati(int golPenati) {
-        this.golPenati = golPenati;
+    public void setGolPenalti(int golPenalti) {
+        this.golPenalti = golPenalti;
     }
 
     public Equipe getEquipe() {
@@ -60,7 +94,5 @@ public class EquipePartida implements Serializable{
     public void setPartida(Partida partida) {
         this.partida = partida;
     }
-
- 
 
 }

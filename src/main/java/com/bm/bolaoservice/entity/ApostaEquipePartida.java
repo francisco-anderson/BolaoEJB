@@ -6,30 +6,72 @@
 package com.bm.bolaoservice.entity;
 
 import java.io.Serializable;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
  *
  * @author Anderson
  */
+
+@Entity
 @Table(name = "APOSTA_EQUIPE_PARTIDA")
+@NamedQueries({
+    @NamedQuery(name = "ApostaEquipePartida.findAll", query = "SELECT a FROM ApostaEquipePartida a"),
+    @NamedQuery(name = "ApostaEquipePartida.findByGols", query = "SELECT a FROM ApostaEquipePartida a WHERE a.gol = :gols"),
+    @NamedQuery(name = "ApostaEquipePartida.findByGolsPenalti", query = "SELECT a FROM ApostaEquipePartida a WHERE a.golPenalti = :golsPenalti"),
+    @NamedQuery(name = "ApostaEquipePartida.findByIdAposta", query = "SELECT a FROM ApostaEquipePartida a WHERE a.apostaEquipePartidaPK.idAposta = :idAposta"),
+    @NamedQuery(name = "ApostaEquipePartida.findByIdPartida", query = "SELECT a FROM ApostaEquipePartida a WHERE a.apostaEquipePartidaPK.idPartida = :idPartida"),
+    @NamedQuery(name = "ApostaEquipePartida.findByIdEquipe", query = "SELECT a FROM ApostaEquipePartida a WHERE a.apostaEquipePartidaPK.idEquipe = :idEquipe")})
 public class ApostaEquipePartida implements Serializable {
 
     private static final long serialVersionUID = -5508100380517081748L;
 
+    @EmbeddedId
+    protected ApostaEquipePartidaPK apostaEquipePartidaPK;
     @Column(name = "GOLS")
     private int gol;
     @Column(name = "GOLS_PENALTI")
     private int golPenalti;
-    @ManyToOne(cascade = CascadeType.REFRESH)
-    private Equipe equipe;
-    @ManyToOne(cascade = CascadeType.REFRESH)
-    private Partida partida;
-    @ManyToOne(cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "ID_APOSTA", referencedColumnName = "ID_APOSTA", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
     private Aposta aposta;
+    @JoinColumn(name = "ID_EQUIPE", referencedColumnName = "ID_EQUIPE", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private Equipe equipe;
+    @JoinColumn(name = "ID_PARTIDA", referencedColumnName = "ID_PARTIDA", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private Partida partida;
+
+    public ApostaEquipePartida() {
+    }
+
+    public ApostaEquipePartida(ApostaEquipePartidaPK apostaEquipePartidaPK) {
+        this.apostaEquipePartidaPK = apostaEquipePartidaPK;
+    }
+
+    public ApostaEquipePartida(ApostaEquipePartidaPK apostaEquipePartidaPK, int gol) {
+        this.apostaEquipePartidaPK = apostaEquipePartidaPK;
+        this.gol = gol;
+    }
+
+    public ApostaEquipePartida(Long idAposta, Long idPartida, Long idEquipe) {
+        this.apostaEquipePartidaPK = new ApostaEquipePartidaPK(idAposta, idPartida, idEquipe);
+    }
+
+    public ApostaEquipePartidaPK getApostaEquipePartidaPK() {
+        return apostaEquipePartidaPK;
+    }
+
+    public void setApostaEquipePartidaPK(ApostaEquipePartidaPK apostaEquipePartidaPK) {
+        this.apostaEquipePartidaPK = apostaEquipePartidaPK;
+    }
 
     public int getGol() {
         return gol;
@@ -70,6 +112,7 @@ public class ApostaEquipePartida implements Serializable {
     public void setAposta(Aposta aposta) {
         this.aposta = aposta;
     }
-   
+    
+    
 
 }

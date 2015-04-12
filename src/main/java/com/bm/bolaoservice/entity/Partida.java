@@ -6,14 +6,17 @@
 package com.bm.bolaoservice.entity;
 
 import java.util.Date;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
@@ -25,6 +28,14 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @SequenceGenerator(allocationSize = 1, initialValue = 1, name = "PAR_SEQ", sequenceName = "PARTIDA_SEQ")
+@NamedQueries({
+    @NamedQuery(name = "Partida.findAll", query = "SELECT p FROM Partida p"),
+    @NamedQuery(name = "Partida.findByIdPartida", query = "SELECT p FROM Partida p WHERE p.id = :idPartida"),
+    @NamedQuery(name = "Partida.findByFase", query = "SELECT p FROM Partida p WHERE p.fase = :fase"),
+    @NamedQuery(name = "Partida.findByTipo", query = "SELECT p FROM Partida p WHERE p.tipo = :tipo"),
+    @NamedQuery(name = "Partida.findByDataPartida", query = "SELECT p FROM Partida p WHERE p.dataPartida = :dataPartida"),
+    @NamedQuery(name = "Partida.findByLocalPartida", query = "SELECT p FROM Partida p WHERE p.localPartida = :localPartida"),
+    @NamedQuery(name = "Partida.findByStatus", query = "SELECT p FROM Partida p WHERE p.status = :status")})
 public class Partida implements AbstractEntity {
 
     private static final long serialVersionUID = 6073361808409878750L;
@@ -41,12 +52,13 @@ public class Partida implements AbstractEntity {
     @Column(name = "LOCAL_PARTIDA")
     private String localPartida;
     private String status;
-    @OneToMany
-    @JoinColumn(name = "ID_PARTIDA")
-    private EquipePartida equipePartida;
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JoinColumn(name = "ID_PARTIDA")
-    private ApostaEquipePartida apostaEquipePartida;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "partida")
+    private List<ApostaEquipePartida> apostaEquipePartidaList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "partida")
+    private List<EquipePartida> equipePartidaList;
+    @JoinColumn(name = "ID_CAMPEONATO", referencedColumnName = "ID_CAMPEONATO")
+    @ManyToOne
+    private Campeonato campeonato;
 
     @Override
     public Long getId() {
@@ -97,21 +109,28 @@ public class Partida implements AbstractEntity {
         this.status = status;
     }
 
-    public EquipePartida getEquipePartida() {
-        return equipePartida;
+    public List<ApostaEquipePartida> getApostaEquipePartidaList() {
+        return apostaEquipePartidaList;
     }
 
-    public void setEquipePartida(EquipePartida equipePartida) {
-        this.equipePartida = equipePartida;
+    public void setApostaEquipePartidaList(List<ApostaEquipePartida> apostaEquipePartidaList) {
+        this.apostaEquipePartidaList = apostaEquipePartidaList;
     }
 
-    public ApostaEquipePartida getApostaEquipePartida() {
-        return apostaEquipePartida;
+    public List<EquipePartida> getEquipePartidaList() {
+        return equipePartidaList;
     }
 
-    public void setApostaEquipePartida(ApostaEquipePartida apostaEquipePartida) {
-        this.apostaEquipePartida = apostaEquipePartida;
+    public void setEquipePartidaList(List<EquipePartida> equipePartidaList) {
+        this.equipePartidaList = equipePartidaList;
     }
-    
+
+    public Campeonato getCampeonato() {
+        return campeonato;
+    }
+
+    public void setCampeonato(Campeonato campeonato) {
+        this.campeonato = campeonato;
+    }
 
 }
