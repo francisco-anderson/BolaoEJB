@@ -23,7 +23,7 @@ import javax.persistence.SequenceGenerator;
  * @author 220460
  */
 @Entity
-@SequenceGenerator(allocationSize = 1, initialValue = 1, name = "TIME_SEQ", sequenceName = "TIME_SEQ")
+@SequenceGenerator(allocationSize = 1, initialValue = 1, name = "EQUIPE_SEQ", sequenceName = "EQUIPE_SEQ")
 @NamedQueries({
     @NamedQuery(name = "Equipe.findAll", query = "SELECT e FROM Equipe e"),
     @NamedQuery(name = "Equipe.findByIdEquipe", query = "SELECT e FROM Equipe e WHERE e.id = :idEquipe"),
@@ -33,8 +33,8 @@ public class Equipe implements AbstractEntity {
     private static final long serialVersionUID = -5667197242867752204L;
 
     @Id
-    @GeneratedValue(generator = "TIME_SEQ", strategy = GenerationType.SEQUENCE)
-    @Column(name = "ID_TIME")
+    @GeneratedValue(generator = "EQUIPE_SEQ", strategy = GenerationType.SEQUENCE)
+    @Column(name = "ID_EQUIPE")
     private Long id;
     private String nome;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "equipe")

@@ -10,6 +10,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -44,11 +45,11 @@ public class Aposta implements AbstractEntity {
     @Temporal(TemporalType.DATE)
     @Column(name = "DATA_APOSTA")
     private Date dataAposta;
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "USUARIO_APOSTA",
-            joinColumns = @JoinColumn(name = "ID_APOSTA"),
-            inverseJoinColumns = @JoinColumn(name = "ID_USUARIO"))
-    private List<Usuario> usuarios;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "USUARIO_APOSTA", joinColumns = {
+        @JoinColumn(name = "ID_APOSTA", referencedColumnName = "ID_APOSTA")}, inverseJoinColumns = {
+        @JoinColumn(name = "ID_USUARIO", referencedColumnName = "ID_USUARIO")})
+    private List<Usuario> usuarioList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "aposta")
     private List<ApostaEquipePartida> apostaEquipePartidaList;
 
@@ -69,12 +70,12 @@ public class Aposta implements AbstractEntity {
         this.dataAposta = dataAposta;
     }
 
-    public List<Usuario> getUsuarios() {
-        return usuarios;
+    public List<Usuario> getUsuarioList() {
+        return usuarioList;
     }
 
-    public void setUsuarios(List<Usuario> usuarios) {
-        this.usuarios = usuarios;
+    public void setUsuarioList(List<Usuario> usuarioList) {
+        this.usuarioList = usuarioList;
     }
 
     public List<ApostaEquipePartida> getApostaEquipePartidaList() {

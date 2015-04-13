@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -51,14 +52,14 @@ public class Campeonato implements AbstractEntity {
     @Temporal(TemporalType.DATE)
     private Date dataFinal;
     private String status;
-    @OneToMany(mappedBy = "campeonato")
+    @OneToMany(mappedBy = "campeonato",fetch = FetchType.EAGER)
     private List<Pontuacao> pontuacaoList;
-    @OneToMany(mappedBy = "campeonato")
+    @OneToMany(mappedBy = "campeonato",fetch = FetchType.EAGER)
     private List<Regra> regraList;
     @ManyToOne
     @JoinColumn(name = "ID_USUARIO", referencedColumnName = "ID_USUARIO")
     private Usuario usuario;
-    @OneToMany(mappedBy = "campeonato")
+    @OneToMany(mappedBy = "campeonato",fetch = FetchType.EAGER)
     private List<Partida> partidaList;
 
     @Override

@@ -6,6 +6,7 @@
 package com.bm.bolaoservice.entity;
 
 import java.util.List;
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,7 +14,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -42,13 +42,13 @@ public class Usuario implements AbstractEntity {
     private String nome;
     private String email;
     private String senha;
-    @ManyToMany(mappedBy = "usuarios", cascade = CascadeType.ALL)
-    private List<Aposta> apostas;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
+    @ManyToMany(mappedBy = "usuarioList",fetch = FetchType.EAGER)
+    private List<Aposta> apostaList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario",fetch = FetchType.EAGER)
     private List<Pontuacao> pontuacaoList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario",fetch = FetchType.EAGER)
     private List<Campeonato> campeonatoList;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "usuario")
+    @OneToMany(mappedBy = "usuario",fetch = FetchType.EAGER)
     private List<Equipe> equipeList;
 
     @Override
@@ -84,12 +84,12 @@ public class Usuario implements AbstractEntity {
         this.senha = senha;
     }
 
-    public List<Aposta> getApostas() {
-        return apostas;
+    public List<Aposta> getApostaList() {
+        return apostaList;
     }
 
-    public void setApostas(List<Aposta> apostas) {
-        this.apostas = apostas;
+    public void setApostaList(List<Aposta> apostaList) {
+        this.apostaList = apostaList;
     }
 
     public List<Pontuacao> getPontuacaoList() {
