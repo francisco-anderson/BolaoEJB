@@ -3,11 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.bm</groupId>
-    <artifactId>BolaoService</artifactId>
+    <artifactId>BolaoEJB</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>ejb</packaging>
 
-    <name>BolaoService</name>
+    <name>BolaoEJB</name>
 
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
