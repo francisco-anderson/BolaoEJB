@@ -17,6 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -47,11 +48,8 @@ public class Aposta implements AbstractEntity {
     @Temporal(TemporalType.DATE)
     @Column(name = "DATA_APOSTA")
     private Date dataAposta;
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "USUARIO_APOSTA", joinColumns = {
-        @JoinColumn(name = "ID_APOSTA", referencedColumnName = "ID_APOSTA")}, inverseJoinColumns = {
-        @JoinColumn(name = "ID_USUARIO", referencedColumnName = "ID_USUARIO")})
-    private List<Usuario> usuarioList;
+    @ManyToOne   
+    private Usuario usuario;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "aposta",fetch = FetchType.EAGER)
     private List<ApostaEquipePartida> apostaEquipePartidaList;
 
@@ -72,13 +70,6 @@ public class Aposta implements AbstractEntity {
         this.dataAposta = dataAposta;
     }
 
-    public List<Usuario> getUsuarioList() {
-        return usuarioList;
-    }
-
-    public void setUsuarioList(List<Usuario> usuarioList) {
-        this.usuarioList = usuarioList;
-    }
 
     public List<ApostaEquipePartida> getApostaEquipePartidaList() {
         return apostaEquipePartidaList;
@@ -86,6 +77,14 @@ public class Aposta implements AbstractEntity {
 
     public void setApostaEquipePartidaList(List<ApostaEquipePartida> apostaEquipePartidaList) {
         this.apostaEquipePartidaList = apostaEquipePartidaList;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
  
