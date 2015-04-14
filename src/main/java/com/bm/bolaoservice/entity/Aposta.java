@@ -23,11 +23,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author Anderson
  */
+@XmlRootElement
 @Entity
 @SequenceGenerator(allocationSize = 1, initialValue = 1, name = "APO_SEQ", sequenceName = "APOSTA_SEQ")
 @NamedQueries({
@@ -50,7 +52,7 @@ public class Aposta implements AbstractEntity {
         @JoinColumn(name = "ID_APOSTA", referencedColumnName = "ID_APOSTA")}, inverseJoinColumns = {
         @JoinColumn(name = "ID_USUARIO", referencedColumnName = "ID_USUARIO")})
     private List<Usuario> usuarioList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "aposta")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "aposta",fetch = FetchType.EAGER)
     private List<ApostaEquipePartida> apostaEquipePartidaList;
 
     @Override

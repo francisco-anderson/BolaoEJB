@@ -14,11 +14,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author Anderson
  */
+@XmlRootElement
 @Table(name = "EQUIPE_PARTIDA")
 @Entity
 @NamedQueries({

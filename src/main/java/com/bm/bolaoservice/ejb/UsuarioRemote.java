@@ -23,4 +23,6 @@ public interface UsuarioRemote extends Serializable{
     
     public Usuario consultaPorId(Long id);
     
+    public Usuario consultarLogin(String email, String senha);
+    
 }

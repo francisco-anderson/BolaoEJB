@@ -21,11 +21,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author Anderson
  */
+@XmlRootElement
 @Entity
 @SequenceGenerator(allocationSize = 1, initialValue = 1, name = "PAR_SEQ", sequenceName = "PARTIDA_SEQ")
 @NamedQueries({

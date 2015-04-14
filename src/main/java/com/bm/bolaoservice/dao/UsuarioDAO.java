@@ -45,5 +45,16 @@ public class UsuarioDAO extends AbstractPersistence<Usuario, Long> {
             return null;
         }
     }
+    
+    public Usuario consultarUsuarioLogin(String email, String senha){
+        Query query = em.createNamedQuery("Usuario.findLogin");
+        query.setParameter("email", email);
+        query.setParameter("senha", senha);
+        try{
+            return (Usuario) query.getSingleResult();
+        } catch (NoResultException ex){
+            return null;
+        }
+    }
 
 }

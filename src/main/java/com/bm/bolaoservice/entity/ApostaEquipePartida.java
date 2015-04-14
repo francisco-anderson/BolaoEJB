@@ -14,12 +14,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author Anderson
  */
-
+@XmlRootElement
 @Entity
 @Table(name = "APOSTA_EQUIPE_PARTIDA")
 @NamedQueries({
@@ -36,9 +37,9 @@ public class ApostaEquipePartida implements Serializable {
     @EmbeddedId
     protected ApostaEquipePartidaPK apostaEquipePartidaPK;
     @Column(name = "GOLS")
-    private int gol;
+    private Integer gol;
     @Column(name = "GOLS_PENALTI")
-    private int golPenalti;
+    private Integer golPenalti;
     @JoinColumn(name = "ID_APOSTA", referencedColumnName = "ID_APOSTA", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Aposta aposta;
@@ -73,19 +74,19 @@ public class ApostaEquipePartida implements Serializable {
         this.apostaEquipePartidaPK = apostaEquipePartidaPK;
     }
 
-    public int getGol() {
+    public Integer getGol() {
         return gol;
     }
 
-    public void setGol(int gol) {
+    public void setGol(Integer gol) {
         this.gol = gol;
     }
 
-    public int getGolPenalti() {
+    public Integer getGolPenalti() {
         return golPenalti;
     }
 
-    public void setGolPenalti(int golPenalti) {
+    public void setGolPenalti(Integer golPenalti) {
         this.golPenalti = golPenalti;
     }
 

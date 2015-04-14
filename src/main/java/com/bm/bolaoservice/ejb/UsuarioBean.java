@@ -42,4 +42,10 @@ public class UsuarioBean implements UsuarioRemote {
         return dao.find(id);
     }
 
+    @Override
+    public Usuario consultarLogin(String email, String senha) {
+        UsuarioDAO dao = new UsuarioDAO(em);
+        return dao.consultarUsuarioLogin(email, senha);
+    }
+
 }
