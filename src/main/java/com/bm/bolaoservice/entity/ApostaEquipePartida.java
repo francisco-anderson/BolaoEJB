@@ -40,15 +40,6 @@ public class ApostaEquipePartida implements Serializable {
     private Integer gol;
     @Column(name = "GOLS_PENALTI")
     private Integer golPenalti;
-    @JoinColumn(name = "ID_APOSTA", referencedColumnName = "ID_APOSTA", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private Aposta aposta;
-    @JoinColumn(name = "ID_EQUIPE", referencedColumnName = "ID_EQUIPE", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private Equipe equipe;
-    @JoinColumn(name = "ID_PARTIDA", referencedColumnName = "ID_PARTIDA", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private Partida partida;
 
     public ApostaEquipePartida() {
     }
@@ -89,31 +80,5 @@ public class ApostaEquipePartida implements Serializable {
     public void setGolPenalti(Integer golPenalti) {
         this.golPenalti = golPenalti;
     }
-
-    public Equipe getEquipe() {
-        return equipe;
-    }
-
-    public void setEquipe(Equipe equipe) {
-        this.equipe = equipe;
-    }
-
-    public Partida getPartida() {
-        return partida;
-    }
-
-    public void setPartida(Partida partida) {
-        this.partida = partida;
-    }
-
-    public Aposta getAposta() {
-        return aposta;
-    }
-
-    public void setAposta(Aposta aposta) {
-        this.aposta = aposta;
-    }
-    
-    
 
 }

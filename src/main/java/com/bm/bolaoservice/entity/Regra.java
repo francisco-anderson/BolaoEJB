@@ -38,10 +38,7 @@ public class Regra implements AbstractEntity {
     @Column(name = "ID_REGRA")
     private Long id;
     private String nome;
-    private int pontos;
-    @JoinColumn(name = "ID_CAMPEONATO", referencedColumnName = "ID_CAMPEONATO")
-    @ManyToOne
-    private Campeonato campeonato;
+    private Integer pontos;
 
     @Override
     public Long getId() {
@@ -60,20 +57,12 @@ public class Regra implements AbstractEntity {
         this.nome = nome;
     }
 
-    public int getPontos() {
+    public Integer getPontos() {
         return pontos;
     }
 
-    public void setPontos(int pontos) {
+    public void setPontos(Integer pontos) {
         this.pontos = pontos;
-    }
-
-    public Campeonato getCampeonato() {
-        return campeonato;
-    }
-
-    public void setCampeonato(Campeonato campeonato) {
-        this.campeonato = campeonato;
     }
 
 }

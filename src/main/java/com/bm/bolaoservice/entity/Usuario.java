@@ -13,6 +13,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -44,13 +45,17 @@ public class Usuario implements AbstractEntity {
     private String nome;
     private String email;
     private String senha;
-    @OneToMany(mappedBy = "usuarioList",fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @JoinColumn(name = "ID_USUARIO",referencedColumnName = "ID_USUARIO")
     private List<Aposta> apostaList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario",fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @JoinColumn(name = "ID_USUARIO", referencedColumnName = "ID_USUARIO")
     private List<Pontuacao> pontuacaoList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario",fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @JoinColumn(name = "ID_USUARIO", referencedColumnName = "ID_USUARIO")
     private List<Campeonato> campeonatoList;
-    @OneToMany(mappedBy = "usuario",fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @JoinColumn(name = "ID_USUARIO", referencedColumnName = "ID_USUARIO")
     private List<Equipe> equipeList;
 
     @Override

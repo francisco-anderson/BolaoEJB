@@ -47,10 +47,9 @@ public class Aposta implements AbstractEntity {
     private Long id;
     @Temporal(TemporalType.DATE)
     @Column(name = "DATA_APOSTA")
-    private Date dataAposta;
-    @ManyToOne   
-    private Usuario usuario;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "aposta",fetch = FetchType.EAGER)
+    private Date dataAposta;    
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @JoinColumn(name = "ID_APOSTA", referencedColumnName = "ID_APOSTA", insertable = false, updatable = false)
     private List<ApostaEquipePartida> apostaEquipePartidaList;
 
     @Override
@@ -79,14 +78,7 @@ public class Aposta implements AbstractEntity {
         this.apostaEquipePartidaList = apostaEquipePartidaList;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
+  
  
 
 }

@@ -10,6 +10,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -54,13 +55,12 @@ public class Partida implements AbstractEntity {
     @Column(name = "LOCAL_PARTIDA")
     private String localPartida;
     private String status;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "partida")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "ID_PARTIDA", referencedColumnName = "ID_PARTIDA", insertable = false, updatable = false)
     private List<ApostaEquipePartida> apostaEquipePartidaList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "partida")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "ID_PARTIDA", referencedColumnName = "ID_PARTIDA", insertable = false, updatable = false)
     private List<EquipePartida> equipePartidaList;
-    @JoinColumn(name = "ID_CAMPEONATO", referencedColumnName = "ID_CAMPEONATO")
-    @ManyToOne
-    private Campeonato campeonato;
 
     @Override
     public Long getId() {
@@ -125,14 +125,6 @@ public class Partida implements AbstractEntity {
 
     public void setEquipePartidaList(List<EquipePartida> equipePartidaList) {
         this.equipePartidaList = equipePartidaList;
-    }
-
-    public Campeonato getCampeonato() {
-        return campeonato;
-    }
-
-    public void setCampeonato(Campeonato campeonato) {
-        this.campeonato = campeonato;
     }
 
 }

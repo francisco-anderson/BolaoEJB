@@ -7,6 +7,7 @@ package com.bm.bolaoservice.entity;
 
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -54,14 +55,14 @@ public class Campeonato implements AbstractEntity {
     @Temporal(TemporalType.DATE)
     private Date dataFinal;
     private String status;
-    @OneToMany(mappedBy = "campeonato",fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "ID_CAMPEONATO", referencedColumnName = "ID_CAMPEONATO")
     private List<Pontuacao> pontuacaoList;
-    @OneToMany(mappedBy = "campeonato",fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "ID_CAMPEONATO", referencedColumnName = "ID_CAMPEONATO")
     private List<Regra> regraList;
-    @ManyToOne
-    @JoinColumn(name = "ID_USUARIO", referencedColumnName = "ID_USUARIO")
-    private Usuario usuario;
-    @OneToMany(mappedBy = "campeonato",fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "ID_CAMPEONATO", referencedColumnName = "ID_CAMPEONATO")
     private List<Partida> partidaList;
 
     @Override
@@ -111,14 +112,6 @@ public class Campeonato implements AbstractEntity {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
     }
 
     public List<Pontuacao> getPontuacaoList() {

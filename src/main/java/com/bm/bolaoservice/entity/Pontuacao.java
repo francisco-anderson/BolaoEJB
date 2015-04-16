@@ -36,13 +36,7 @@ public class Pontuacao implements AbstractEntity {
     @GeneratedValue(generator = "PON_SEQ", strategy = GenerationType.SEQUENCE)
     @Column(name = "ID_PONTUACAO")
     private Long id;
-    private int pontos;
-    @JoinColumn(name = "ID_USUARIO", referencedColumnName = "ID_USUARIO")
-    @ManyToOne
-    private Usuario usuario;
-    @JoinColumn(name = "ID_CAMPEONATO", referencedColumnName = "ID_CAMPEONATO")
-    @ManyToOne
-    private Campeonato campeonato;
+    private Integer pontos;
 
     @Override
     public Long getId() {
@@ -53,27 +47,13 @@ public class Pontuacao implements AbstractEntity {
         this.id = id;
     }
 
-    public int getPontos() {
+    public Integer getPontos() {
         return pontos;
     }
 
-    public void setPontos(int pontos) {
+    public void setPontos(Integer pontos) {
         this.pontos = pontos;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
-    public Campeonato getCampeonato() {
-        return campeonato;
-    }
-
-    public void setCampeonato(Campeonato campeonato) {
-        this.campeonato = campeonato;
-    }
+  
 }

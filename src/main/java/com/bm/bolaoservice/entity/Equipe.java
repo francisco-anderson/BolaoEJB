@@ -8,6 +8,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -39,13 +40,12 @@ public class Equipe implements AbstractEntity {
     @Column(name = "ID_EQUIPE")
     private Long id;
     private String nome;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "equipe")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "ID_EQUIPE", referencedColumnName = "ID_EQUIPE", insertable = false, updatable = false)
     private List<EquipePartida> equipePartidaList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "equipe")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "ID_EQUIPE", referencedColumnName = "ID_EQUIPE", insertable = false, updatable = false)
     private List<ApostaEquipePartida> apostaEquipePartidaList;
-    @JoinColumn(name = "ID_USUARIO", referencedColumnName = "ID_USUARIO")
-    @ManyToOne
-    private Usuario usuario;
 
     @Override
     public Long getId() {
@@ -79,17 +79,5 @@ public class Equipe implements AbstractEntity {
     public void setApostaEquipePartidaList(List<ApostaEquipePartida> apostaEquipePartidaList) {
         this.apostaEquipePartidaList = apostaEquipePartidaList;
     }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
-   
-
-  
 
 }
