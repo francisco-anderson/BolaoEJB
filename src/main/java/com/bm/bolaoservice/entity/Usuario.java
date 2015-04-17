@@ -43,6 +43,7 @@ public class Usuario implements AbstractEntity {
     @Column(name = "ID_USUARIO")
     private Long id;
     private String nome;
+    @Column(unique = true)
     private String email;
     private String senha;
     @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)

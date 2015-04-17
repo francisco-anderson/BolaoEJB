@@ -15,7 +15,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -34,11 +33,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Campeonato.findAll", query = "SELECT c FROM Campeonato c"),
     @NamedQuery(name = "Campeonato.findByIdCampeonato", query = "SELECT c FROM Campeonato c WHERE c.id = :idCampeonato"),
-    @NamedQuery(name = "Campeonato.findByNome", query = "SELECT c FROM Campeonato c WHERE c.nome = :nome"),
+    @NamedQuery(name = "Campeonato.findByNome", query = "SELECT c FROM Campeonato c WHERE c.nome LIKE '%:nome%' ORDER BY c.nome ASC"),
     @NamedQuery(name = "Campeonato.findByQtdEquipe", query = "SELECT c FROM Campeonato c WHERE c.qtdEquipe = :qtdEquipe"),
     @NamedQuery(name = "Campeonato.findByDatainicio", query = "SELECT c FROM Campeonato c WHERE c.dataInicio = :datainicio"),
     @NamedQuery(name = "Campeonato.findByDatafinal", query = "SELECT c FROM Campeonato c WHERE c.dataFinal = :datafinal"),
-    @NamedQuery(name = "Campeonato.findByStatus", query = "SELECT c FROM Campeonato c WHERE c.status = :status")})
+    @NamedQuery(name = "Campeonato.findByDataInicioBetweenStatus", query = "SELECT c FROM Campeonato c WHERE  c.status= :status   AND  c.dataInicio BETWEEN :datacomeco and :datafim  ORDER BY c.dataInicio ASC"),
+    @NamedQuery(name = "Campeonato.findByStatus", query = "SELECT c FROM Campeonato c WHERE c.status = :status ORDER BY c.nome ASC")})
 public class Campeonato implements AbstractEntity {
 
     private static final long serialVersionUID = -542156336692445325L;
@@ -49,7 +49,7 @@ public class Campeonato implements AbstractEntity {
     private Long id;
     private String nome;
     @Column(name = "QTD_EQUIPE")
-    private int qtdEquipe;
+    private Integer qtdEquipe;
     @Temporal(TemporalType.DATE)
     private Date dataInicio;
     @Temporal(TemporalType.DATE)
@@ -82,11 +82,11 @@ public class Campeonato implements AbstractEntity {
         this.nome = nome;
     }
 
-    public int getQtdEquipe() {
+    public Integer getQtdEquipe() {
         return qtdEquipe;
     }
 
-    public void setQtdEquipe(int qtdEquipe) {
+    public void setQtdEquipe(Integer qtdEquipe) {
         this.qtdEquipe = qtdEquipe;
     }
 

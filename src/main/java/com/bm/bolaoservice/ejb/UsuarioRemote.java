@@ -7,7 +7,9 @@ package com.bm.bolaoservice.ejb;
 
 import com.bm.bolaoservice.entity.Usuario;
 import java.io.Serializable;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
+import javax.ejb.EJBTransactionRolledbackException;
 import javax.ejb.Remote;
 
 /**
@@ -15,14 +17,14 @@ import javax.ejb.Remote;
  * @author Anderson
  */
 @Remote
-public interface UsuarioRemote extends Serializable{
-    
+public interface UsuarioRemote extends Serializable {
+
     public List<Usuario> consultarTodos();
-    
-    public Usuario consultarPorEmail(String email);
-    
+
     public Usuario consultaPorId(Long id);
-    
+
     public Usuario consultarLogin(String email, String senha);
-    
+
+    public Usuario novoUsuario(Usuario usuario);
+
 }

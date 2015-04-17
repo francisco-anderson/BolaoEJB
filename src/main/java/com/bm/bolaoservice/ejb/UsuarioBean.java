@@ -31,12 +31,6 @@ public class UsuarioBean implements UsuarioRemote {
     }
 
     @Override
-    public Usuario consultarPorEmail(String email) {
-        UsuarioDAO dao = new UsuarioDAO(em);
-        return dao.consultarUsuarioEmail(email);
-    }
-
-    @Override
     public Usuario consultaPorId(Long id) {
         UsuarioDAO dao = new UsuarioDAO(em);
         return dao.find(id);
@@ -46,6 +40,15 @@ public class UsuarioBean implements UsuarioRemote {
     public Usuario consultarLogin(String email, String senha) {
         UsuarioDAO dao = new UsuarioDAO(em);
         return dao.consultarUsuarioLogin(email, senha);
+    }
+
+    @Override
+    public Usuario novoUsuario(Usuario usuario) {
+        UsuarioDAO dao = new UsuarioDAO(em);
+        if (dao.consultarUsuarioEmail(usuario.getEmail()) != null) {
+            return null;
+        }
+        return dao.save(usuario);
     }
 
 }
