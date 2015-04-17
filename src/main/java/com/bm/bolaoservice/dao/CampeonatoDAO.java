@@ -31,7 +31,7 @@ public class CampeonatoDAO extends AbstractPersistence<Campeonato, Long> {
     
     public List<Campeonato> buscarCampeonatoNome(String nome){
         Query query = em.createNamedQuery("Campeonato.findByNome");
-        query.setParameter("nome", "%"+nome+"%");
+        query.setParameter("nome", "UPPER(%"+nome+"%)");
         return query.getResultList();
     }
     
