@@ -28,22 +28,22 @@ public class CampeonatoDAO extends AbstractPersistence<Campeonato, Long> {
     protected EntityManager getEntityManager() {
         return this.em;
     }
-    
-    public List<Campeonato> buscarCampeonatoNome(String nome){
+
+    public List<Campeonato> buscarCampeonatoNome(String nome) {
         Query query = em.createNamedQuery("Campeonato.findByNome");
-        query.setParameter("nome", "%"+nome.toUpperCase()+"%");
+        query.setParameter("nome", "%" + nome.toUpperCase() + "%");
         return query.getResultList();
     }
-    
-    public List<Campeonato> buscarCampeonatosPorDataStatus(Date datacomeco, Date datafim,String status){
+
+    public List<Campeonato> buscarCampeonatosPorDataStatus(Date datacomeco, Date datafim, String status) {
         Query query = em.createNamedQuery("Campeonato.findByDataInicioBetweenStatus");
         query.setParameter("datacomeco", datacomeco);
         query.setParameter("datafim", datafim);
         query.setParameter("status", status);
         return query.getResultList();
     }
-    
-    public List<Campeonato> buscarCampeonatoPorStatus(String status){
+
+    public List<Campeonato> buscarCampeonatoPorStatus(String status) {
         Query query = em.createNamedQuery("Campeonato.findByStatus");
         query.setParameter("status", status);
         return query.getResultList();

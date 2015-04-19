@@ -7,9 +7,7 @@ package com.bm.bolaoservice.ejb;
 
 import com.bm.bolaoservice.entity.Usuario;
 import java.io.Serializable;
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
-import javax.ejb.EJBTransactionRolledbackException;
 import javax.ejb.Remote;
 
 /**
