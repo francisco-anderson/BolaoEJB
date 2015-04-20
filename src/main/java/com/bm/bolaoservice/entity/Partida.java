@@ -48,6 +48,8 @@ public class Partida implements AbstractEntity {
     private Long id;
     private String fase;
     private String tipo;
+    @Column(name = "NUMERO_PARTIDA")
+    private Integer numeroPartida;
     @Temporal(TemporalType.DATE)
     @Column(name = "DATA_PARTIDA")
     private Date dataPartida;
