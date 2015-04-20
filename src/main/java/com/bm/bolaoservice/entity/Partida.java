@@ -87,6 +87,14 @@ public class Partida implements AbstractEntity {
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
+    
+    public Integer getNumeroPartida(){
+        return this.numeroPartida;
+    }
+    
+    public void setNumeroPartida(Integer numeroPartida){
+        this.numeroPartida=numeroPartida;
+    }
 
     public Date getDataPartida() {
         return dataPartida;
