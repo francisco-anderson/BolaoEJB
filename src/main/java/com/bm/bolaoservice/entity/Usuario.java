@@ -50,7 +50,7 @@ public class Usuario implements AbstractEntity {
     private List<Aposta> apostaList;
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinColumn(name = "ID_USUARIO", referencedColumnName = "ID_USUARIO")
-    private List<Pontuacao> pontuacaoList;
+    private List<PontuacaoUsuario> pontuacaoList;
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinColumn(name = "ID_USUARIO", referencedColumnName = "ID_USUARIO")
     private List<Campeonato> campeonatoList;
@@ -99,11 +99,11 @@ public class Usuario implements AbstractEntity {
         this.apostaList = apostaList;
     }
 
-    public List<Pontuacao> getPontuacaoList() {
+    public List<PontuacaoUsuario> getPontuacaoList() {
         return pontuacaoList;
     }
 
-    public void setPontuacaoList(List<Pontuacao> pontuacaoList) {
+    public void setPontuacaoList(List<PontuacaoUsuario> pontuacaoList) {
         this.pontuacaoList = pontuacaoList;
     }
 
