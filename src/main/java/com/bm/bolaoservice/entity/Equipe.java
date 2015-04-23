@@ -45,6 +45,9 @@ public class Equipe implements AbstractEntity {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "ID_EQUIPE", referencedColumnName = "ID_EQUIPE", insertable = false, updatable = false)
     private List<ApostaEquipePartida> apostaEquipePartidaList;
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @JoinColumn(name = "ID_EQUIPE",referencedColumnName = "ID_EQUIPE")
+    private List<PontuacaoEquipe> pontuacaoEquipeList;
 
     @Override
     public Long getId() {
@@ -77,6 +80,14 @@ public class Equipe implements AbstractEntity {
 
     public void setApostaEquipePartidaList(List<ApostaEquipePartida> apostaEquipePartidaList) {
         this.apostaEquipePartidaList = apostaEquipePartidaList;
+    }
+
+    public List<PontuacaoEquipe> getPontuacaoEquipeList() {
+        return pontuacaoEquipeList;
+    }
+
+    public void setPontuacaoEquipeList(List<PontuacaoEquipe> pontuacaoEquipeList) {
+        this.pontuacaoEquipeList = pontuacaoEquipeList;
     }
 
 }
