@@ -15,6 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -60,6 +61,8 @@ public class Partida implements AbstractEntity {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "ID_PARTIDA", referencedColumnName = "ID_PARTIDA", insertable = false, updatable = false)
     private List<EquipePartida> equipePartidaList;
+    @ManyToOne
+    private Campeonato campeonato;
 
     @Override
     public Long getId() {
@@ -124,6 +127,14 @@ public class Partida implements AbstractEntity {
 
     public void setEquipePartidaList(List<EquipePartida> equipePartidaList) {
         this.equipePartidaList = equipePartidaList;
+    }
+
+    public Campeonato getCampeonato() {
+        return campeonato;
+    }
+
+    public void setCampeonato(Campeonato campeonato) {
+        this.campeonato = campeonato;
     }
 
 }
