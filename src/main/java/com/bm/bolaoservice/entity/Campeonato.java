@@ -38,7 +38,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Campeonato.findByDatainicio", query = "SELECT c FROM Campeonato c WHERE c.dataInicio = :datainicio"),
     @NamedQuery(name = "Campeonato.findByDatafinal", query = "SELECT c FROM Campeonato c WHERE c.dataFinal = :datafinal"),
     @NamedQuery(name = "Campeonato.findByDataInicioBetweenStatus", query = "SELECT c FROM Campeonato c WHERE  c.status= :status   AND  c.dataInicio BETWEEN :datacomeco and :datafim  ORDER BY c.dataInicio ASC"),
-    @NamedQuery(name = "Campeonato.findByStatus", query = "SELECT c FROM Campeonato c WHERE c.status = :status ORDER BY c.nome ASC")})
+    @NamedQuery(name = "Campeonato.findByStatus", query = "SELECT c FROM Campeonato c WHERE c.status = :status ORDER BY c.nome ASC"),
+    @NamedQuery(name = "Campeonato.findEquipeByCampeonato", query = "SELECT DISTINCT e.id,e.nome FROM Equipe e EquipePartida ep Partida p Campeonato c INNER JOIN ep ON ep.equipePartidaPK.idEquipe = e.id INNER JOIN p ON p.equipePartidaList.equipePartidaPK.idPartida = ep.equipePartidaPK.idPartida WHERE p.campeonato.id = :id ORDER BY e.nome ASC")
+})
 public class Campeonato implements AbstractEntity {
 
     private static final long serialVersionUID = -542156336692445325L;
@@ -61,7 +63,7 @@ public class Campeonato implements AbstractEntity {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "ID_CAMPEONATO", referencedColumnName = "ID_CAMPEONATO")
     private List<Regra> regraList;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER,mappedBy = "campeonato")
     @JoinColumn(name = "ID_CAMPEONATO", referencedColumnName = "ID_CAMPEONATO")
     private List<Partida> partidaList;
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
