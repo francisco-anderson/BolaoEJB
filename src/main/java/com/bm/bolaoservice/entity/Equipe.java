@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -39,15 +40,15 @@ public class Equipe implements AbstractEntity {
     @Column(name = "ID_EQUIPE")
     private Long id;
     private String nome;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "ID_EQUIPE", referencedColumnName = "ID_EQUIPE", insertable = false, updatable = false)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)    
     private List<EquipePartida> equipePartidaList;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "ID_EQUIPE", referencedColumnName = "ID_EQUIPE", insertable = false, updatable = false)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)    
     private List<ApostaEquipePartida> apostaEquipePartidaList;
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    @JoinColumn(name = "ID_EQUIPE",referencedColumnName = "ID_EQUIPE")
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER, mappedBy = "equipe")    
     private List<PontuacaoEquipe> pontuacaoEquipeList;
+    @ManyToOne
+    @JoinColumn(name = "ID_USUARIO", referencedColumnName = "ID_USUARIO") 
+    private Usuario usuario;
 
     @Override
     public Long getId() {
@@ -88,6 +89,14 @@ public class Equipe implements AbstractEntity {
 
     public void setPontuacaoEquipeList(List<PontuacaoEquipe> pontuacaoEquipeList) {
         this.pontuacaoEquipeList = pontuacaoEquipeList;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
 }

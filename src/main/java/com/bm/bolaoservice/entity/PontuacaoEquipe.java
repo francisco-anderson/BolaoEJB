@@ -5,10 +5,13 @@
  */
 package com.bm.bolaoservice.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -24,13 +27,20 @@ public class PontuacaoEquipe implements AbstractEntity {
     private static final long serialVersionUID = -7067194567840944632L;
     
     @Id
+    @Column(name = "ID_PONTUACAO")
     @GeneratedValue(generator = "PONT_EQUIP",strategy = GenerationType.SEQUENCE)
     private Long id;
     private Integer vitorias;
     private Integer derrotas;
     private Integer empates;
     private Integer golspros;
-    private Integer golscontra;
+    private Integer golscontras;
+    @ManyToOne
+    @JoinColumn(name = "ID_EQUIPE",referencedColumnName = "ID_EQUIPE")
+    private Equipe equipe;
+    @ManyToOne
+    @JoinColumn(name = "ID_CAMPEONATO", referencedColumnName = "ID_CAMPEONATO")
+    private Campeonato campeonato;
 
     @Override
     public Long getId() {
@@ -73,12 +83,28 @@ public class PontuacaoEquipe implements AbstractEntity {
         this.golspros = golspros;
     }
 
-    public Integer getGolscontra() {
-        return golscontra;
+    public Integer getGolscontras() {
+        return golscontras;
     }
 
-    public void setGolscontra(Integer golscontra) {
-        this.golscontra = golscontra;
+    public void setGolscontras(Integer golscontras) {
+        this.golscontras = golscontras;
+    }
+
+    public Equipe getEquipe() {
+        return equipe;
+    }
+
+    public void setEquipe(Equipe equipe) {
+        this.equipe = equipe;
+    }
+
+    public Campeonato getCampeonato() {
+        return campeonato;
+    }
+
+    public void setCampeonato(Campeonato campeonato) {
+        this.campeonato = campeonato;
     }
     
 

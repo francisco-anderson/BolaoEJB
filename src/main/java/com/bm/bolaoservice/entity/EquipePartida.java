@@ -9,6 +9,8 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -37,6 +39,12 @@ public class EquipePartida implements Serializable {
     private Integer gol;
     @Column(name = "GOLS_PENALTI")
     private Integer golPenalti;
+    @ManyToOne
+    @JoinColumn(name = "ID_EQUIPE", referencedColumnName = "ID_EQUIPE")
+    private Equipe equipe;
+    @ManyToOne
+    @JoinColumn(name = "ID_PARTIDA", referencedColumnName = "ID_PARTIDA")
+    private Partida partida;
 
     public EquipePartida() {
     }
@@ -71,6 +79,22 @@ public class EquipePartida implements Serializable {
 
     public void setGolPenalti(Integer golPenalti) {
         this.golPenalti = golPenalti;
+    }
+
+    public Equipe getEquipe() {
+        return equipe;
+    }
+
+    public void setEquipe(Equipe equipe) {
+        this.equipe = equipe;
+    }
+
+    public Partida getPartida() {
+        return partida;
+    }
+
+    public void setPartida(Partida partida) {
+        this.partida = partida;
     }
 
 }

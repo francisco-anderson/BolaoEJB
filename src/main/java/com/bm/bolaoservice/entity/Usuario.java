@@ -13,7 +13,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -45,17 +44,13 @@ public class Usuario implements AbstractEntity {
     @Column(unique = true)
     private String email;
     private String senha;
-    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-    @JoinColumn(name = "ID_USUARIO",referencedColumnName = "ID_USUARIO")
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)   
     private List<Aposta> apostaList;
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    @JoinColumn(name = "ID_USUARIO", referencedColumnName = "ID_USUARIO")
-    private List<PontuacaoUsuario> pontuacaoList;
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    @JoinColumn(name = "ID_USUARIO", referencedColumnName = "ID_USUARIO")
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "usuario")    
+    private List<PontuacaoUsuario> pontuacaoUsuarioList;
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER, mappedBy = "usuario")      
     private List<Campeonato> campeonatoList;
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    @JoinColumn(name = "ID_USUARIO", referencedColumnName = "ID_USUARIO")
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER, mappedBy = "usuario")       
     private List<Equipe> equipeList;
 
     @Override
@@ -99,12 +94,12 @@ public class Usuario implements AbstractEntity {
         this.apostaList = apostaList;
     }
 
-    public List<PontuacaoUsuario> getPontuacaoList() {
-        return pontuacaoList;
+    public List<PontuacaoUsuario> getPontuacaoUsuarioList() {
+        return pontuacaoUsuarioList;
     }
 
-    public void setPontuacaoList(List<PontuacaoUsuario> pontuacaoList) {
-        this.pontuacaoList = pontuacaoList;
+    public void setPontuacaoUsuarioList(List<PontuacaoUsuario> pontuacaoUsuarioList) {
+        this.pontuacaoUsuarioList = pontuacaoUsuarioList;
     }
 
     public List<Campeonato> getCampeonatoList() {

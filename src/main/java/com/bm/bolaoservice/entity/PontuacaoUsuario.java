@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
@@ -23,11 +25,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @Table(name = "PONTUACAO_USUARIO")
 @Entity
-@SequenceGenerator(allocationSize = 1, initialValue = 1, name = "PON_SEQ", sequenceName = "PONTUACAO_SEQ")
+@SequenceGenerator(allocationSize = 1, initialValue = 1, name = "PON_SEQ", sequenceName = "PONTUACAO_USUARIO_SEQ")
 @NamedQueries({
-    @NamedQuery(name = "Pontuacao.findAll", query = "SELECT p FROM Pontuacao p"),
-    @NamedQuery(name = "Pontuacao.findByIdPontuacao", query = "SELECT p FROM Pontuacao p WHERE p.id = :idPontuacao"),
-    @NamedQuery(name = "Pontuacao.findByPontos", query = "SELECT p FROM Pontuacao p WHERE p.pontos = :pontos")})
+    @NamedQuery(name = "Pontuacao.findAll", query = "SELECT p FROM PontuacaoUsuario p"),
+    @NamedQuery(name = "Pontuacao.findByIdPontuacao", query = "SELECT p FROM PontuacaoUsuario p WHERE p.id = :idPontuacao"),
+    @NamedQuery(name = "Pontuacao.findByPontos", query = "SELECT p FROM PontuacaoUsuario p WHERE p.pontos = :pontos")})
 public class PontuacaoUsuario implements AbstractEntity {
 
     private static final long serialVersionUID = 4015303586229474633L;
@@ -37,6 +39,12 @@ public class PontuacaoUsuario implements AbstractEntity {
     @Column(name = "ID_PONTUACAO")
     private Long id;
     private Integer pontos;
+    @ManyToOne
+    @JoinColumn(name = "ID_USUARIO", referencedColumnName = "ID_USUARIO")
+    private Usuario usuario;    
+    @ManyToOne
+    @JoinColumn(name = "ID_CAMPEONATO", referencedColumnName = "ID_CAMPEONATO")
+    private Campeonato campeonato;
 
     @Override
     public Long getId() {
@@ -53,6 +61,22 @@ public class PontuacaoUsuario implements AbstractEntity {
 
     public void setPontos(Integer pontos) {
         this.pontos = pontos;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public Campeonato getCampeonato() {
+        return campeonato;
+    }
+
+    public void setCampeonato(Campeonato campeonato) {
+        this.campeonato = campeonato;
     }
 
   

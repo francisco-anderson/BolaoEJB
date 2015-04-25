@@ -15,6 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -39,7 +40,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Campeonato.findByDatafinal", query = "SELECT c FROM Campeonato c WHERE c.dataFinal = :datafinal"),
     @NamedQuery(name = "Campeonato.findByDataInicioBetweenStatus", query = "SELECT c FROM Campeonato c WHERE  c.status= :status   AND  c.dataInicio BETWEEN :datacomeco and :datafim  ORDER BY c.dataInicio ASC"),
     @NamedQuery(name = "Campeonato.findByStatus", query = "SELECT c FROM Campeonato c WHERE c.status = :status ORDER BY c.nome ASC"),
-    @NamedQuery(name = "Campeonato.findEquipeByCampeonato", query = "SELECT DISTINCT e.id,e.nome FROM Equipe e EquipePartida ep Partida p Campeonato c INNER JOIN ep ON ep.equipePartidaPK.idEquipe = e.id INNER JOIN p ON p.equipePartidaList.equipePartidaPK.idPartida = ep.equipePartidaPK.idPartida WHERE p.campeonato.id = :id ORDER BY e.nome ASC")
+    @NamedQuery(name = "Campeonato.findEquipeByCampeonato", query = "SELECT e.id,e.nome FROM Equipe e  INNER JOIN EquipePartida ep ON ep.equipePartidaPK.idEquipe = e.id INNER JOIN Partida p ON p.equipePartidaList.equipePartidaPK.idPartida = ep.equipePartidaPK.idPartida WHERE p.campeonato.id = :id ORDER BY e.nome ASC")
 })
 public class Campeonato implements AbstractEntity {
 
@@ -57,18 +58,18 @@ public class Campeonato implements AbstractEntity {
     @Temporal(TemporalType.DATE)
     private Date dataFinal;
     private String status;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "ID_CAMPEONATO", referencedColumnName = "ID_CAMPEONATO")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "campeonato")    
     private List<PontuacaoUsuario> pontuacaoUsuarioList;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "ID_CAMPEONATO", referencedColumnName = "ID_CAMPEONATO")
     private List<Regra> regraList;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER,mappedBy = "campeonato")
-    @JoinColumn(name = "ID_CAMPEONATO", referencedColumnName = "ID_CAMPEONATO")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "campeonato")    
     private List<Partida> partidaList;
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    @JoinColumn(name = "ID_CAMPEONATO",referencedColumnName = "ID_CAMPEONATO")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "campeonato")    
     private List<PontuacaoEquipe> pontuacaoEquipList;
+    @ManyToOne
+    @JoinColumn(name = "ID_USUARIO", referencedColumnName = "ID_USUARIO")  
+    private Usuario usuario;
 
     @Override
     public Long getId() {
@@ -149,6 +150,14 @@ public class Campeonato implements AbstractEntity {
 
     public void setPontuacaoEquipList(List<PontuacaoEquipe> pontuacaoEquipList) {
         this.pontuacaoEquipList = pontuacaoEquipList;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
 }
