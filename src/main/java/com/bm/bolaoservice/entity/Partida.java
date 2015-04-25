@@ -57,9 +57,9 @@ public class Partida implements AbstractEntity {
     @Column(name = "LOCAL_PARTIDA")
     private String localPartida;
     private String status;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)    
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER,mappedBy = "partida")    
     private List<ApostaEquipePartida> apostaEquipePartidaList;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)    
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER,mappedBy = "partida")    
     private List<EquipePartida> equipePartidaList;
     @ManyToOne
     @JoinColumn(name = "ID_CAMPEONATO", referencedColumnName = "ID_CAMPEONATO")

@@ -46,7 +46,7 @@ public class Aposta implements AbstractEntity {
     @Temporal(TemporalType.DATE)
     @Column(name = "DATA_APOSTA")
     private Date dataAposta;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)    
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "aposta")    
     private List<ApostaEquipePartida> apostaEquipePartidaList;
     @ManyToOne
     @JoinColumn(name = "ID_USUARIO", referencedColumnName = "ID_USUARIO")

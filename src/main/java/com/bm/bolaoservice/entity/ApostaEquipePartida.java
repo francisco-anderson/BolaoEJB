@@ -41,13 +41,13 @@ public class ApostaEquipePartida implements Serializable {
     @Column(name = "GOLS_PENALTI")
     private Integer golPenalti;
     @ManyToOne
-    @JoinColumn(name = "ID_APOSTA", referencedColumnName = "ID_APOSTA")
+    @JoinColumn(name = "ID_APOSTA", referencedColumnName = "ID_APOSTA",insertable = false,updatable = false)
     private Aposta aposta;
     @ManyToOne
-    @JoinColumn(name = "ID_EQUIPE", referencedColumnName = "ID_EQUIPE")
+    @JoinColumn(name = "ID_EQUIPE", referencedColumnName = "ID_EQUIPE",insertable = false,updatable = false)
     private Equipe equipe;
     @ManyToOne
-    @JoinColumn(name = "ID_PARTIDA", referencedColumnName = "ID_PARTIDA")
+    @JoinColumn(name = "ID_PARTIDA", referencedColumnName = "ID_PARTIDA",insertable = false,updatable = false)
     private Partida partida;
 
     public ApostaEquipePartida() {

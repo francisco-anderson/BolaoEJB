@@ -40,9 +40,9 @@ public class Equipe implements AbstractEntity {
     @Column(name = "ID_EQUIPE")
     private Long id;
     private String nome;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)    
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "equipe")    
     private List<EquipePartida> equipePartidaList;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)    
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER,mappedBy = "equipe")    
     private List<ApostaEquipePartida> apostaEquipePartidaList;
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER, mappedBy = "equipe")    
     private List<PontuacaoEquipe> pontuacaoEquipeList;

@@ -40,10 +40,10 @@ public class EquipePartida implements Serializable {
     @Column(name = "GOLS_PENALTI")
     private Integer golPenalti;
     @ManyToOne
-    @JoinColumn(name = "ID_EQUIPE", referencedColumnName = "ID_EQUIPE")
+    @JoinColumn(name = "ID_EQUIPE", referencedColumnName = "ID_EQUIPE",insertable = false,updatable = false)
     private Equipe equipe;
     @ManyToOne
-    @JoinColumn(name = "ID_PARTIDA", referencedColumnName = "ID_PARTIDA")
+    @JoinColumn(name = "ID_PARTIDA", referencedColumnName = "ID_PARTIDA",insertable = false,updatable = false)
     private Partida partida;
 
     public EquipePartida() {

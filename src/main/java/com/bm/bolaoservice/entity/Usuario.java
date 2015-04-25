@@ -44,7 +44,7 @@ public class Usuario implements AbstractEntity {
     @Column(unique = true)
     private String email;
     private String senha;
-    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)   
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL, mappedBy = "usuario")   
     private List<Aposta> apostaList;
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "usuario")    
     private List<PontuacaoUsuario> pontuacaoUsuarioList;
