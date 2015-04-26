@@ -6,6 +6,7 @@
 package com.bm.bolaoservice.ejb;
 
 import com.bm.bolaoservice.entity.Campeonato;
+import com.bm.bolaoservice.entity.Equipe;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -25,5 +26,7 @@ public interface CampeonatoRemote extends Serializable{
     public List<Campeonato> buscarPorDatainicioStatus(Date datacomeço,Date datafim, String status);
     
     public List<Campeonato> buscarPorStatus(String status);
+    
+    public List<Equipe> buscarEquipesPorCampeonato(Long id);
     
 }

@@ -7,6 +7,7 @@ package com.bm.bolaoservice.ejb;
 
 import com.bm.bolaoservice.dao.CampeonatoDAO;
 import com.bm.bolaoservice.entity.Campeonato;
+import com.bm.bolaoservice.entity.Equipe;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -47,6 +48,12 @@ public class CampeonatoBean implements CampeonatoRemote {
     public List<Campeonato> buscarPorStatus(String status) {
         CampeonatoDAO dao = new CampeonatoDAO(em);
         return dao.buscarCampeonatoPorStatus(status);
+    }
+
+    @Override
+    public List<Equipe> buscarEquipesPorCampeonato(Long id) {
+        CampeonatoDAO dao = new CampeonatoDAO(em);
+        return dao.buscarEquipesPorCampeonato(id);
     }
 
 }
