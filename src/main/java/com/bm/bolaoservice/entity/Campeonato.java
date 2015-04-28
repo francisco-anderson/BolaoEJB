@@ -58,11 +58,16 @@ public class Campeonato implements AbstractEntity {
     @Temporal(TemporalType.DATE)
     private Date dataFinal;
     private String status;
+    private Integer regra1;
+    private Integer regra2;
+    private Integer regra3;
+    private Integer regra4;
+    private Integer regra5;
+    private Integer regra6;
+    private Integer regra7;
+    private Integer regra8;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "campeonato")
     private List<PontuacaoUsuario> pontuacaoUsuarioList;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "ID_CAMPEONATO", referencedColumnName = "ID_CAMPEONATO")
-    private List<Regra> regraList;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "campeonato")
     private List<Partida> partidaList;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "campeonato")
@@ -128,14 +133,6 @@ public class Campeonato implements AbstractEntity {
         this.pontuacaoUsuarioList = pontuacaoUsuarioList;
     }
 
-    public List<Regra> getRegraList() {
-        return regraList;
-    }
-
-    public void setRegraList(List<Regra> regraList) {
-        this.regraList = regraList;
-    }
-
     public List<Partida> getPartidaList() {
         return partidaList;
     }
@@ -158,6 +155,70 @@ public class Campeonato implements AbstractEntity {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public Integer getRegra1() {
+        return regra1;
+    }
+
+    public void setRegra1(Integer regra1) {
+        this.regra1 = regra1;
+    }
+
+    public Integer getRegra2() {
+        return regra2;
+    }
+
+    public void setRegra2(Integer regra2) {
+        this.regra2 = regra2;
+    }
+
+    public Integer getRegra3() {
+        return regra3;
+    }
+
+    public void setRegra3(Integer regra3) {
+        this.regra3 = regra3;
+    }
+
+    public Integer getRegra4() {
+        return regra4;
+    }
+
+    public void setRegra4(Integer regra4) {
+        this.regra4 = regra4;
+    }
+
+    public Integer getRegra5() {
+        return regra5;
+    }
+
+    public void setRegra5(Integer regra5) {
+        this.regra5 = regra5;
+    }
+
+    public Integer getRegra6() {
+        return regra6;
+    }
+
+    public void setRegra6(Integer regra6) {
+        this.regra6 = regra6;
+    }
+
+    public Integer getRegra7() {
+        return regra7;
+    }
+
+    public void setRegra7(Integer regra7) {
+        this.regra7 = regra7;
+    }
+
+    public Integer getRegra8() {
+        return regra8;
+    }
+
+    public void setRegra8(Integer regra8) {
+        this.regra8 = regra8;
     }
 
 }
