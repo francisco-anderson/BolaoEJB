@@ -5,6 +5,7 @@
  */
 package com.bm.bolaoservice.entity;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -23,6 +24,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -39,8 +41,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Campeonato.findByDatainicio", query = "SELECT c FROM Campeonato c WHERE c.dataInicio = :datainicio"),
     @NamedQuery(name = "Campeonato.findByDatafinal", query = "SELECT c FROM Campeonato c WHERE c.dataFinal = :datafinal"),
     @NamedQuery(name = "Campeonato.findByDataInicioBetweenStatus", query = "SELECT c FROM Campeonato c WHERE  c.status= :status   AND  c.dataInicio BETWEEN :datacomeco and :datafim  ORDER BY c.dataInicio ASC"),
-    @NamedQuery(name = "Campeonato.findByStatus", query = "SELECT c FROM Campeonato c WHERE c.status = :status ORDER BY c.nome ASC"),
-    @NamedQuery(name = "Campeonato.findEquipeByCampeonato", query = "SELECT DISTINCT e FROM Equipe e INNER JOIN E.equipePartidaList as EP INNER JOIN EP.partida AS p WHERE p.campeonato.id = :id ORDER BY e.nome ASC")
+    @NamedQuery(name = "Campeonato.findByStatus", query = "SELECT c FROM Campeonato c WHERE c.status = :status ORDER BY c.nome ASC"),    
+    @NamedQuery(name = "Campeonato.findByUsuario", query = "SELECT c FROM Campeonato c WHERE c.usuario.id = :id")        
 })
 public class Campeonato implements AbstractEntity {
 
@@ -66,11 +68,14 @@ public class Campeonato implements AbstractEntity {
     private Integer regra6;
     private Integer regra7;
     private Integer regra8;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "campeonato")
-    private List<PontuacaoUsuario> pontuacaoUsuarioList;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "campeonato")
-    private List<Partida> partidaList;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "campeonato")
+    @XStreamOmitField
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "campeonato")
+    private List<PontuacaoUsuario> pontuacaoUsuarioList; 
+    @XStreamOmitField
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "campeonato")
+    private List<Partida> partidaList;  
+    @XStreamOmitField
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "campeonato")
     private List<PontuacaoEquipe> pontuacaoEquipList;
     @ManyToOne
     @JoinColumn(name = "ID_USUARIO", referencedColumnName = "ID_USUARIO")
@@ -125,6 +130,7 @@ public class Campeonato implements AbstractEntity {
         this.status = status;
     }
 
+    @XmlTransient
     public List<PontuacaoUsuario> getPontuacaoUsuarioList() {
         return pontuacaoUsuarioList;
     }
@@ -133,6 +139,7 @@ public class Campeonato implements AbstractEntity {
         this.pontuacaoUsuarioList = pontuacaoUsuarioList;
     }
 
+    @XmlTransient
     public List<Partida> getPartidaList() {
         return partidaList;
     }
@@ -141,6 +148,7 @@ public class Campeonato implements AbstractEntity {
         this.partidaList = partidaList;
     }
 
+    @XmlTransient
     public List<PontuacaoEquipe> getPontuacaoEquipList() {
         return pontuacaoEquipList;
     }

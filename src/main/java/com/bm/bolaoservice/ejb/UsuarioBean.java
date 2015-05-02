@@ -51,4 +51,10 @@ public class UsuarioBean implements UsuarioRemote {
         return dao.save(usuario);
     }
 
+    @Override
+    public Usuario salvar(Usuario usuario) {
+        UsuarioDAO dao = new UsuarioDAO(em);
+        return dao.save(usuario);
+    }
+
 }

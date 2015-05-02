@@ -16,6 +16,8 @@ import javax.persistence.criteria.Root;
 /**
  *
  * @author Anderson
+ * @param <T>
+ * @param <PK>
  */
 public abstract class AbstractPersistence<T extends AbstractEntity, PK extends Number> {
     

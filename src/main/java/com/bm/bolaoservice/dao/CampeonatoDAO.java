@@ -6,7 +6,6 @@
 package com.bm.bolaoservice.dao;
 
 import com.bm.bolaoservice.entity.Campeonato;
-import com.bm.bolaoservice.entity.Equipe;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -49,9 +48,9 @@ public class CampeonatoDAO extends AbstractPersistence<Campeonato, Long> {
         query.setParameter("status", status);
         return query.getResultList();
     }
-    
-    public List<Equipe> buscarEquipesPorCampeonato(Long id) {
-        Query query = em.createNamedQuery("Campeonato.findEquipeByCampeonato");
+
+    public List<Campeonato> buscarCampeonatoPorUsuario(Long id) {
+        Query query = em.createNamedQuery("Campeonato.findByUsuario");
         query.setParameter("id", id);
         return query.getResultList();
     }

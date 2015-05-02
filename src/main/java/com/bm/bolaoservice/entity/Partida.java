@@ -5,6 +5,7 @@
  */
 package com.bm.bolaoservice.entity;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -23,6 +24,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -56,10 +58,12 @@ public class Partida implements AbstractEntity {
     private Date dataPartida;
     @Column(name = "LOCAL_PARTIDA")
     private String localPartida;
-    private String status;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER,mappedBy = "partida")    
-    private List<ApostaEquipePartida> apostaEquipePartidaList;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER,mappedBy = "partida")    
+    private String status;    
+    @XStreamOmitField
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,mappedBy = "partida")    
+    private List<ApostaEquipePartida> apostaEquipePartidaList;    
+    @XStreamOmitField
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,mappedBy = "partida")    
     private List<EquipePartida> equipePartidaList;
     @ManyToOne
     @JoinColumn(name = "ID_CAMPEONATO", referencedColumnName = "ID_CAMPEONATO")
@@ -122,6 +126,7 @@ public class Partida implements AbstractEntity {
         this.status = status;
     }
 
+    @XmlTransient
     public List<ApostaEquipePartida> getApostaEquipePartidaList() {
         return apostaEquipePartidaList;
     }
@@ -130,6 +135,7 @@ public class Partida implements AbstractEntity {
         this.apostaEquipePartidaList = apostaEquipePartidaList;
     }
 
+    @XmlTransient
     public List<EquipePartida> getEquipePartidaList() {
         return equipePartidaList;
     }

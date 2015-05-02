@@ -4,6 +4,7 @@
  */
 package com.bm.bolaoservice.entity;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -19,6 +20,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -30,7 +32,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Equipe.findAll", query = "SELECT e FROM Equipe e"),
     @NamedQuery(name = "Equipe.findByIdEquipe", query = "SELECT e FROM Equipe e WHERE e.id = :idEquipe"),
-    @NamedQuery(name = "Equipe.findByNome", query = "SELECT e FROM Equipe e WHERE e.nome = :nome")})
+    @NamedQuery(name = "Equipe.findByNome", query = "SELECT e FROM Equipe e WHERE UPPER(e.nome) LIKE :nome ORDER BY e.nome ASC"),
+    @NamedQuery(name = "Equipe.findEquipeByCampeonato", query = "SELECT DISTINCT e FROM Equipe e INNER JOIN E.equipePartidaList as EP INNER JOIN EP.partida AS p WHERE p.campeonato.id = :id ORDER BY e.nome ASC"),
+    @NamedQuery(name = "Equipe.findByUsuario", query = "SELECT e FROM Equipe e WHERE e.usuario.id = :idUsuario")})
 public class Equipe implements AbstractEntity {
 
     private static final long serialVersionUID = -5667197242867752204L;
@@ -39,12 +43,15 @@ public class Equipe implements AbstractEntity {
     @GeneratedValue(generator = "EQUIPE_SEQ", strategy = GenerationType.SEQUENCE)
     @Column(name = "ID_EQUIPE")
     private Long id;
-    private String nome;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "equipe")    
-    private List<EquipePartida> equipePartidaList;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER,mappedBy = "equipe")    
-    private List<ApostaEquipePartida> apostaEquipePartidaList;
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER, mappedBy = "equipe")    
+    private String nome;    
+    @XStreamOmitField
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "equipe")    
+    private List<EquipePartida> equipePartidaList;   
+    @XStreamOmitField
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,mappedBy = "equipe")    
+    private List<ApostaEquipePartida> apostaEquipePartidaList;    
+    @XStreamOmitField
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, mappedBy = "equipe")    
     private List<PontuacaoEquipe> pontuacaoEquipeList;
     @ManyToOne
     @JoinColumn(name = "ID_USUARIO", referencedColumnName = "ID_USUARIO") 
@@ -67,6 +74,7 @@ public class Equipe implements AbstractEntity {
         this.nome = nome;
     }
 
+    @XmlTransient
     public List<EquipePartida> getEquipePartidaList() {
         return equipePartidaList;
     }
@@ -75,6 +83,7 @@ public class Equipe implements AbstractEntity {
         this.equipePartidaList = equipePartidaList;
     }
 
+    @XmlTransient
     public List<ApostaEquipePartida> getApostaEquipePartidaList() {
         return apostaEquipePartidaList;
     }
@@ -83,6 +92,7 @@ public class Equipe implements AbstractEntity {
         this.apostaEquipePartidaList = apostaEquipePartidaList;
     }
 
+    @XmlTransient
     public List<PontuacaoEquipe> getPontuacaoEquipeList() {
         return pontuacaoEquipeList;
     }

@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -22,6 +23,7 @@ import javax.persistence.Table;
 @Table(name = "PONTUACAO_EQUIPE")
 @Entity
 @SequenceGenerator(allocationSize = 1, initialValue = 1, name = "PONT_EQUIP", sequenceName = "PONTUACAO_EQUIPE_SEQ")
+@XmlRootElement
 public class PontuacaoEquipe implements AbstractEntity {
 
     private static final long serialVersionUID = -7067194567840944632L;

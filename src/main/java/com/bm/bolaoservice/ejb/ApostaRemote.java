@@ -5,6 +5,7 @@
  */
 package com.bm.bolaoservice.ejb;
 
+import com.bm.bolaoservice.entity.Aposta;
 import com.bm.bolaoservice.entity.Usuario;
 import java.io.Serializable;
 import java.util.List;
@@ -15,16 +16,10 @@ import javax.ejb.Remote;
  * @author Anderson
  */
 @Remote
-public interface UsuarioRemote extends Serializable {
-
-    public List<Usuario> consultarTodos();
-
-    public Usuario consultaPorId(Long id);
-
-    public Usuario consultarLogin(String email, String senha);
-
-    public Usuario novoUsuario(Usuario usuario);
+public interface ApostaRemote extends Serializable{
     
-    public Usuario salvar(Usuario usuario);
-
+    public Aposta buscarPorId(Long id);
+    
+    public List<Aposta> buscarPorUsuario(Usuario usuario);
+    
 }

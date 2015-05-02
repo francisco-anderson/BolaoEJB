@@ -5,11 +5,9 @@
  */
 package com.bm.bolaoservice.ejb;
 
-import com.bm.bolaoservice.entity.Campeonato;
 import com.bm.bolaoservice.entity.Equipe;
 import com.bm.bolaoservice.entity.Usuario;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 import javax.ejb.Remote;
 
@@ -18,16 +16,18 @@ import javax.ejb.Remote;
  * @author Anderson
  */
 @Remote
-public interface CampeonatoRemote extends Serializable{
+public interface EquipeRemote extends Serializable{
     
-    public Campeonato consultaPorId(Long id);
+    public List<Equipe> buscarPorNome(String nome);
     
-    public List<Campeonato> buscarPorNome(String nome);
+    public List<Equipe> buscarPorUsuario (Usuario usuario);
     
-    public List<Campeonato> buscarPorDatainicioStatus(Date datacomeço,Date datafim, String status);
+    public void remover(Equipe equipe);
     
-    public List<Campeonato> buscarPorStatus(String status);  
-        
-    public List<Campeonato> buscarPorUsuario(Usuario usuario);
+    public Equipe salvar (Equipe equipe);
+    
+    public Equipe buscarPorId(Long id);
+    
+    public List<Equipe> buscarEquipesPorCampeonato(Long id);
     
 }

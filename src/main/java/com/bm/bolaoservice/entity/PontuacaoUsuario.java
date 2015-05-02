@@ -27,9 +27,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @SequenceGenerator(allocationSize = 1, initialValue = 1, name = "PON_SEQ", sequenceName = "PONTUACAO_USUARIO_SEQ")
 @NamedQueries({
-    @NamedQuery(name = "Pontuacao.findAll", query = "SELECT p FROM PontuacaoUsuario p"),
-    @NamedQuery(name = "Pontuacao.findByIdPontuacao", query = "SELECT p FROM PontuacaoUsuario p WHERE p.id = :idPontuacao"),
-    @NamedQuery(name = "Pontuacao.findByPontos", query = "SELECT p FROM PontuacaoUsuario p WHERE p.pontos = :pontos")})
+    @NamedQuery(name = "PontuacaoUsuario.findAll", query = "SELECT p FROM PontuacaoUsuario p"),
+    @NamedQuery(name = "PontuacaoUsuario.findByIdPontuacao", query = "SELECT p FROM PontuacaoUsuario p WHERE p.id = :idPontuacao"),
+    @NamedQuery(name = "PontuacaoUsuario.findByPontos", query = "SELECT p FROM PontuacaoUsuario p WHERE p.pontos = :pontos"),
+    @NamedQuery(name = "PontuacaoUsuario.findByUsuario",query = "SELECT p FROM PontuacaoUsuario p WHERE p.usuario.id = :idUsuario"),
+    @NamedQuery(name = "PontuacaoUsuario.findByCampeonato",query = "SELECT p FROM PontuacaoUsuario p WHERE p.campeonato.id = :idCampeonato")})
 public class PontuacaoUsuario implements AbstractEntity {
 
     private static final long serialVersionUID = 4015303586229474633L;

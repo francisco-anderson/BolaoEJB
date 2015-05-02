@@ -5,6 +5,7 @@
  */
 package com.bm.bolaoservice.entity;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -18,6 +19,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -31,7 +33,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Usuario.findByIdUsuario", query = "SELECT u FROM Usuario u WHERE u.id = :idUsuario"),
     @NamedQuery(name = "Usuario.findByNome", query = "SELECT u FROM Usuario u WHERE u.nome = :nome"),
     @NamedQuery(name = "Usuario.findByEmail", query = "SELECT u FROM Usuario u WHERE u.email = :email"),
-    @NamedQuery(name = "Usuario.findLogin",query = "SELECT u FROM Usuario u WHERE u.email= :email and u.senha =:senha")})
+    @NamedQuery(name = "Usuario.findLogin", query = "SELECT u FROM Usuario u WHERE u.email= :email and u.senha =:senha")})
 public class Usuario implements AbstractEntity {
 
     private static final long serialVersionUID = 1799676888636233241L;
@@ -43,14 +45,18 @@ public class Usuario implements AbstractEntity {
     private String nome;
     @Column(unique = true)
     private String email;
-    private String senha;
-    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL, mappedBy = "usuario")   
+    private String senha; 
+    @XStreamOmitField
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "usuario")    
     private List<Aposta> apostaList;
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "usuario")    
-    private List<PontuacaoUsuario> pontuacaoUsuarioList;
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER, mappedBy = "usuario")      
-    private List<Campeonato> campeonatoList;
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER, mappedBy = "usuario")       
+    @XStreamOmitField
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "usuario")   
+    private List<PontuacaoUsuario> pontuacaoUsuarioList; 
+    @XStreamOmitField
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "usuario")    
+    private List<Campeonato> campeonatoList;  
+    @XStreamOmitField
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "usuario")    
     private List<Equipe> equipeList;
 
     @Override
@@ -86,6 +92,7 @@ public class Usuario implements AbstractEntity {
         this.senha = senha;
     }
 
+    @XmlTransient
     public List<Aposta> getApostaList() {
         return apostaList;
     }
@@ -94,6 +101,7 @@ public class Usuario implements AbstractEntity {
         this.apostaList = apostaList;
     }
 
+    @XmlTransient
     public List<PontuacaoUsuario> getPontuacaoUsuarioList() {
         return pontuacaoUsuarioList;
     }
@@ -102,6 +110,7 @@ public class Usuario implements AbstractEntity {
         this.pontuacaoUsuarioList = pontuacaoUsuarioList;
     }
 
+    @XmlTransient
     public List<Campeonato> getCampeonatoList() {
         return campeonatoList;
     }
@@ -110,6 +119,7 @@ public class Usuario implements AbstractEntity {
         this.campeonatoList = campeonatoList;
     }
 
+    @XmlTransient
     public List<Equipe> getEquipeList() {
         return equipeList;
     }

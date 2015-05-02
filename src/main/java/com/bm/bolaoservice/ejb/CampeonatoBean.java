@@ -7,7 +7,7 @@ package com.bm.bolaoservice.ejb;
 
 import com.bm.bolaoservice.dao.CampeonatoDAO;
 import com.bm.bolaoservice.entity.Campeonato;
-import com.bm.bolaoservice.entity.Equipe;
+import com.bm.bolaoservice.entity.Usuario;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -20,7 +20,7 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class CampeonatoBean implements CampeonatoRemote {
-    
+
     @PersistenceContext(unitName = "persistencia")
     private EntityManager em;
 
@@ -51,9 +51,9 @@ public class CampeonatoBean implements CampeonatoRemote {
     }
 
     @Override
-    public List<Equipe> buscarEquipesPorCampeonato(Long id) {
+    public List<Campeonato> buscarPorUsuario(Usuario usuario) {
         CampeonatoDAO dao = new CampeonatoDAO(em);
-        return dao.buscarEquipesPorCampeonato(id);
+        return dao.buscarCampeonatoPorUsuario(usuario.getId());
     }
 
 }
