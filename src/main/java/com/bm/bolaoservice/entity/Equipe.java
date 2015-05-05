@@ -34,7 +34,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Equipe.findByIdEquipe", query = "SELECT e FROM Equipe e WHERE e.id = :idEquipe"),
     @NamedQuery(name = "Equipe.findByNome", query = "SELECT e FROM Equipe e WHERE UPPER(e.nome) LIKE :nome ORDER BY e.nome ASC"),
     @NamedQuery(name = "Equipe.findEquipeByCampeonato", query = "SELECT DISTINCT e FROM Equipe e INNER JOIN E.equipePartidaList as EP INNER JOIN EP.partida AS p WHERE p.campeonato.id = :id ORDER BY e.nome ASC"),
-    @NamedQuery(name = "Equipe.findByUsuario", query = "SELECT e FROM Equipe e WHERE e.usuario.id = :idUsuario")})
+    @NamedQuery(name = "Equipe.findByUsuario", query = "SELECT e FROM Equipe e WHERE e.usuario.id = :idUsuario"),
+    @NamedQuery(name = "Equipe.findEquipeByPontuacaoPorGrupo",query = "SELECT e FROM Equipe e INNER JOIN e.pontuacaoEquipeList AS pe INNER JOIN pe.campeonato AS p WHERE p.usuario.id = :idUsuario AND p.id = :idCampeonato AND e.id IN (SELECT n.equipe.id FROM EquipePartida n INNER JOIN n.partida as o WHERE o.tipo = :tipo) ")})
 public class Equipe implements AbstractEntity {
 
     private static final long serialVersionUID = -5667197242867752204L;

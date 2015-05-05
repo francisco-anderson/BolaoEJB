@@ -5,8 +5,7 @@
  */
 package com.bm.bolaoservice.ejb;
 
-import com.bm.bolaoservice.entity.Aposta;
-import com.bm.bolaoservice.entity.Usuario;
+import com.bm.bolaoservice.entity.Partida;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.Remote;
@@ -16,12 +15,12 @@ import javax.ejb.Remote;
  * @author Anderson
  */
 @Remote
-public interface ApostaRemote extends Serializable{
+public interface PartidaRemote extends Serializable{
     
-    public Aposta buscarPorId(Long id);
+    public List<Partida> buscarPorCampeonato(Long id);
     
-    public List<Aposta> buscarPorUsuario(Usuario usuario);
+    public Partida salvar(Partida partida);
     
-    public Aposta salvar(Aposta aposta);
+    public Partida buscarPartidaPorId(Long id);
     
 }

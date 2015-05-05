@@ -12,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -24,6 +26,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @SequenceGenerator(allocationSize = 1, initialValue = 1, name = "PONT_EQUIP", sequenceName = "PONTUACAO_EQUIPE_SEQ")
 @XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "PontuacaoEquipe.findByEquipe",query = "SELECT p FROM PontuacaoEquipe p WHERE p.equipe.id = :idEquipe"),
+    @NamedQuery(name = "PontuacaoEquipe.findByCampeonato",query = "SELECT p FROM PontuacaoEquipe p WHERE p.campeonato.id = :idCampeonato"),
+    @NamedQuery(name = "PontuacaoEquipe.findByEquipeAndCampeonato",query = "SELECT p FROM PontuacaoEquipe p WHERE p.campeonato.id = :idCampeonato AND p.equipe.id = :idEquipe")
+})
 public class PontuacaoEquipe implements AbstractEntity {
 
     private static final long serialVersionUID = -7067194567840944632L;

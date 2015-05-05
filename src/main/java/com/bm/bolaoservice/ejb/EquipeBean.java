@@ -61,4 +61,11 @@ public class EquipeBean implements EquipeRemote {
         return dao.buscarEquipesPorCampeonato(id);
     }
 
+    @Override
+    public List<Equipe> buscarEquipePorPontuacaoGrupo(Long idUsuario, Long idCampeonato, String tipo) {
+        EquipeDAO dao = new EquipeDAO(em);
+        return dao.buscarEquipePorPontuacaoGrupo(idUsuario, idCampeonato, tipo);
+        
+    }
+
 }

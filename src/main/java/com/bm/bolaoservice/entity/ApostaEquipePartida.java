@@ -29,7 +29,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "ApostaEquipePartida.findByGolsPenalti", query = "SELECT a FROM ApostaEquipePartida a WHERE a.golPenalti = :golsPenalti"),
     @NamedQuery(name = "ApostaEquipePartida.findByIdAposta", query = "SELECT a FROM ApostaEquipePartida a WHERE a.apostaEquipePartidaPK.idAposta = :idAposta"),
     @NamedQuery(name = "ApostaEquipePartida.findByIdPartida", query = "SELECT a FROM ApostaEquipePartida a WHERE a.apostaEquipePartidaPK.idPartida = :idPartida"),
-    @NamedQuery(name = "ApostaEquipePartida.findByIdEquipe", query = "SELECT a FROM ApostaEquipePartida a WHERE a.apostaEquipePartidaPK.idEquipe = :idEquipe")})
+    @NamedQuery(name = "ApostaEquipePartida.findByIdEquipe", query = "SELECT a FROM ApostaEquipePartida a WHERE a.apostaEquipePartidaPK.idEquipe = :idEquipe"),
+    @NamedQuery(name = "ApostaEquipePartida.findByIdEquipeAndPartida",query = "SELECT a FROM ApostaEquipePartida a WHERE a.apostaEquipePartidaPK.idEquipe = :idEquipe AND a.apostaEquipePartidaPK.idPartida = :idPartida")})
 public class ApostaEquipePartida implements Serializable {
 
     private static final long serialVersionUID = -5508100380517081748L;

@@ -36,5 +36,11 @@ public class ApostaBean implements ApostaRemote {
         ApostaDAO dao = new ApostaDAO(em);
         return dao.buscarPorUsuario(usuario.getId());
     }
+    
+    @Override
+    public Aposta salvar(Aposta aposta){
+        ApostaDAO dao = new ApostaDAO(em);
+        return dao.save(aposta);
+    }
 
 }

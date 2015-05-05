@@ -45,5 +45,13 @@ public class EquipeDAO extends AbstractPersistence<Equipe, Long>{
         query.setParameter("id", id);
         return query.getResultList();
     }
+     
+     public List<Equipe> buscarEquipePorPontuacaoGrupo(Long idUsuario,Long idCampeonato, String tipo){
+         Query query = em.createNamedQuery("Equipe.findEquipeByPontuacaoPorGrupo");
+         query.setParameter("idUsuario", idUsuario);
+         query.setParameter("idCampeonato",idCampeonato);
+         query.setParameter("tipo", tipo);
+         return query.getResultList();
+     }
     
 }

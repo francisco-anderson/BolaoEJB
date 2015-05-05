@@ -30,4 +30,6 @@ public interface EquipeRemote extends Serializable{
     
     public List<Equipe> buscarEquipesPorCampeonato(Long id);
     
+    public List<Equipe> buscarEquipePorPontuacaoGrupo(Long idUsuario,Long idCampeonato,String tipo);
+    
 }

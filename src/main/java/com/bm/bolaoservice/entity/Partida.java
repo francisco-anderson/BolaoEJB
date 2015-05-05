@@ -40,7 +40,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Partida.findByTipo", query = "SELECT p FROM Partida p WHERE p.tipo = :tipo"),
     @NamedQuery(name = "Partida.findByDataPartida", query = "SELECT p FROM Partida p WHERE p.dataPartida = :dataPartida"),
     @NamedQuery(name = "Partida.findByLocalPartida", query = "SELECT p FROM Partida p WHERE p.localPartida = :localPartida"),
-    @NamedQuery(name = "Partida.findByStatus", query = "SELECT p FROM Partida p WHERE p.status = :status")})
+    @NamedQuery(name = "Partida.findByStatus", query = "SELECT p FROM Partida p WHERE p.status = :status"),
+    @NamedQuery(name = "Partida.findByCampeonato",query = "SELECT p FROM Partida p WHERE p.campeonato.id = :idCampeonato")})
 public class Partida implements AbstractEntity {
 
     private static final long serialVersionUID = 6073361808409878750L;

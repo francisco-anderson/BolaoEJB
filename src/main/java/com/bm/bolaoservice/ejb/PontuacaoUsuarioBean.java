@@ -19,8 +19,10 @@ import javax.persistence.PersistenceContext;
  * @author Anderson
  */
 @Stateless
-public class PontuacaoUsuarioBean implements PontuacaoUsuarioRemote{
-    
+public class PontuacaoUsuarioBean implements PontuacaoUsuarioRemote {
+
+    private static final long serialVersionUID = -2159741467077691973L;
+
     @PersistenceContext(unitName = "persistencia")
     private EntityManager em;
 
@@ -41,5 +43,5 @@ public class PontuacaoUsuarioBean implements PontuacaoUsuarioRemote{
         PontuacaoUsuarioDAO dao = new PontuacaoUsuarioDAO(em);
         return dao.save(pontuacaoUsuario);
     }
-    
+
 }

@@ -55,5 +55,11 @@ public class CampeonatoBean implements CampeonatoRemote {
         CampeonatoDAO dao = new CampeonatoDAO(em);
         return dao.buscarCampeonatoPorUsuario(usuario.getId());
     }
+    
+    @Override
+    public Campeonato salvar(Campeonato campeonato){
+        CampeonatoDAO dao = new CampeonatoDAO(em);
+        return dao.save(campeonato);
+    }
 
 }
