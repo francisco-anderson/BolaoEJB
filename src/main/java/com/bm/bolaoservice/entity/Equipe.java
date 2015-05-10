@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Equipe.findByNome", query = "SELECT e FROM Equipe e WHERE UPPER(e.nome) LIKE :nome ORDER BY e.nome ASC"),
     @NamedQuery(name = "Equipe.findEquipeByCampeonato", query = "SELECT DISTINCT e FROM Equipe e INNER JOIN E.equipePartidaList as EP INNER JOIN EP.partida AS p WHERE p.campeonato.id = :id ORDER BY e.nome ASC"),
     @NamedQuery(name = "Equipe.findByUsuario", query = "SELECT e FROM Equipe e WHERE e.usuario.id = :idUsuario"),
-    @NamedQuery(name = "Equipe.findEquipeByPontuacaoPorGrupo",query = "SELECT e FROM Equipe e INNER JOIN e.pontuacaoEquipeList AS pe INNER JOIN pe.campeonato AS p WHERE p.usuario.id = :idUsuario AND p.id = :idCampeonato AND e.id IN (SELECT n.equipe.id FROM EquipePartida n INNER JOIN n.partida as o WHERE o.tipo = :tipo) ")})
+    @NamedQuery(name = "Equipe.findEquipeByPontuacaoPorGrupo",query = "SELECT e FROM Equipe e INNER JOIN e.pontuacaoEquipeList AS pe INNER JOIN pe.campeonato AS p WHERE p.usuario.id = :idUsuario AND p.id = :idCampeonato AND e.id IN (SELECT n.equipe.id FROM Resultado n INNER JOIN n.partida as o WHERE o.tipo = :tipo) ")})
 public class Equipe implements AbstractEntity {
 
     private static final long serialVersionUID = -5667197242867752204L;
@@ -47,10 +47,10 @@ public class Equipe implements AbstractEntity {
     private String nome;    
     @XStreamOmitField
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "equipe")    
-    private List<EquipePartida> equipePartidaList;   
+    private List<Resultado> equipePartidaList;   
     @XStreamOmitField
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,mappedBy = "equipe")    
-    private List<ApostaEquipePartida> apostaEquipePartidaList;    
+    private List<ApostaResultado> apostaEquipePartidaList;    
     @XStreamOmitField
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, mappedBy = "equipe")    
     private List<PontuacaoEquipe> pontuacaoEquipeList;
@@ -76,20 +76,20 @@ public class Equipe implements AbstractEntity {
     }
 
     @XmlTransient
-    public List<EquipePartida> getEquipePartidaList() {
+    public List<Resultado> getEquipePartidaList() {
         return equipePartidaList;
     }
 
-    public void setEquipePartidaList(List<EquipePartida> equipePartidaList) {
+    public void setEquipePartidaList(List<Resultado> equipePartidaList) {
         this.equipePartidaList = equipePartidaList;
     }
 
     @XmlTransient
-    public List<ApostaEquipePartida> getApostaEquipePartidaList() {
+    public List<ApostaResultado> getApostaEquipePartidaList() {
         return apostaEquipePartidaList;
     }
 
-    public void setApostaEquipePartidaList(List<ApostaEquipePartida> apostaEquipePartidaList) {
+    public void setApostaEquipePartidaList(List<ApostaResultado> apostaEquipePartidaList) {
         this.apostaEquipePartidaList = apostaEquipePartidaList;
     }
 

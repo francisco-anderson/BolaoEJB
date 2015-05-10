@@ -5,7 +5,7 @@
  */
 package com.bm.bolaoservice.ejb;
 
-import com.bm.bolaoservice.entity.EquipePartida;
+import com.bm.bolaoservice.entity.Resultado;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.Remote;
@@ -15,14 +15,14 @@ import javax.ejb.Remote;
  * @author Anderson
  */
 @Remote
-public interface EquipePartidaRemote extends Serializable{
+public interface ResultadoRemote extends Serializable{
     
-    public EquipePartida buscarPorId(Long idEquipe, Long idPartida);
+    public Resultado buscarPorId(Long idEquipe, Long idPartida);
     
-    public List<EquipePartida> buscarPorEquipe(Long id);
+    public List<Resultado> buscarPorEquipe(Long id);
     
-    public List<EquipePartida> buscarPorPartida(Long id);
+    public List<Resultado> buscarPorPartida(Long id);
     
-    public EquipePartida salvar(EquipePartida equipePartida);
+    public Resultado salvar(Resultado equipePartida);
     
 }

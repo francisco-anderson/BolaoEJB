@@ -5,9 +5,8 @@
  */
 package com.bm.bolaoservice.ejb;
 
-import com.bm.bolaoservice.dao.EquipePartidaDAO;
-import com.bm.bolaoservice.entity.EquipePartida;
-import com.bm.bolaoservice.entity.EquipePartidaPK;
+import com.bm.bolaoservice.dao.ResultadoDAO;
+import com.bm.bolaoservice.entity.Resultado;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -18,7 +17,7 @@ import javax.persistence.PersistenceContext;
  * @author Anderson
  */
 @Stateless
-public class EquipePartidaBean implements EquipePartidaRemote {
+public class ResultadoBean implements ResultadoRemote {
 
     private static final long serialVersionUID = -4478206095350788909L;
 
@@ -26,26 +25,26 @@ public class EquipePartidaBean implements EquipePartidaRemote {
     private EntityManager em;
 
     @Override
-    public EquipePartida buscarPorId(Long idEquipe, Long idPartida) {
-        EquipePartidaDAO dao = new EquipePartidaDAO(em);
-        return dao.find(new EquipePartidaPK(idEquipe, idPartida));
+    public Resultado buscarPorId(Long idEquipe, Long idPartida) {
+        ResultadoDAO dao = new ResultadoDAO(em);
+        return dao.buscarPorPartidaEquipe(idPartida, idEquipe);
     }
 
     @Override
-    public List<EquipePartida> buscarPorEquipe(Long id) {
-        EquipePartidaDAO dao = new EquipePartidaDAO(em);
+    public List<Resultado> buscarPorEquipe(Long id) {
+        ResultadoDAO dao = new ResultadoDAO(em);
         return dao.buscarPorEquipe(id);
     }
 
     @Override
-    public List<EquipePartida> buscarPorPartida(Long id) {
-        EquipePartidaDAO dao = new EquipePartidaDAO(em);
+    public List<Resultado> buscarPorPartida(Long id) {
+        ResultadoDAO dao = new ResultadoDAO(em);
         return dao.buscarPorPartida(id);
     }
 
     @Override
-    public EquipePartida salvar(EquipePartida equipePartida) {
-        EquipePartidaDAO dao = new EquipePartidaDAO(em);
+    public Resultado salvar(Resultado equipePartida) {
+        ResultadoDAO dao = new ResultadoDAO(em);
         return dao.save(equipePartida);
     }
 
