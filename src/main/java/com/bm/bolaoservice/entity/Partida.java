@@ -5,7 +5,6 @@
  */
 package com.bm.bolaoservice.entity;
 
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -60,10 +59,8 @@ public class Partida implements AbstractEntity {
     @Column(name = "LOCAL_PARTIDA")
     private String localPartida;
     private String status;    
-    @XStreamOmitField
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,mappedBy = "partida")    
     private List<ApostaResultado> apostaEquipePartidaList;    
-    @XStreamOmitField
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,mappedBy = "partida")    
     private List<Resultado> equipePartidaList;
     @ManyToOne
