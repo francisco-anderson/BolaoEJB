@@ -5,7 +5,6 @@
  */
 package com.bm.bolaoservice.entity;
 
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -45,18 +44,15 @@ public class Usuario implements AbstractEntity {
     private String nome;
     @Column(unique = true)
     private String email;
-    private String senha; 
-    @XStreamOmitField
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "usuario")    
+    private String senha;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "usuario")
     private List<Aposta> apostaList;
-    @XStreamOmitField
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "usuario")   
-    private List<PontuacaoUsuario> pontuacaoUsuarioList; 
-    @XStreamOmitField
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "usuario")    
-    private List<Campeonato> campeonatoList;  
-    @XStreamOmitField
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "usuario")    
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "usuario")
+    private List<PontuacaoUsuario> pontuacaoUsuarioList;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "usuario")
+    private List<Campeonato> campeonatoList;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "usuario")
     private List<Equipe> equipeList;
 
     @Override

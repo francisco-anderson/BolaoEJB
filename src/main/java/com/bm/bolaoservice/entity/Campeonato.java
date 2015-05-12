@@ -5,7 +5,6 @@
  */
 package com.bm.bolaoservice.entity;
 
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -67,14 +66,11 @@ public class Campeonato implements AbstractEntity {
     private Integer regra5;
     private Integer regra6;
     private Integer regra7;
-    private Integer regra8;
-    @XStreamOmitField
+    private Integer regra8;    
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "campeonato")
-    private List<PontuacaoUsuario> pontuacaoUsuarioList; 
-    @XStreamOmitField
+    private List<PontuacaoUsuario> pontuacaoUsuarioList;    
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "campeonato")
-    private List<Partida> partidaList;  
-    @XStreamOmitField
+    private List<Partida> partidaList;     
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "campeonato")
     private List<PontuacaoEquipe> pontuacaoEquipList;
     @ManyToOne

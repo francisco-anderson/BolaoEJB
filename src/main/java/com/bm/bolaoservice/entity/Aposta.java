@@ -5,7 +5,6 @@
  */
 package com.bm.bolaoservice.entity;
 
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -49,7 +48,6 @@ public class Aposta implements AbstractEntity {
     @Temporal(TemporalType.DATE)
     @Column(name = "DATA_APOSTA")
     private Date dataAposta;    
-    @XStreamOmitField
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "aposta")    
     private List<ApostaResultado> apostaEquipePartidaList;
     @ManyToOne
