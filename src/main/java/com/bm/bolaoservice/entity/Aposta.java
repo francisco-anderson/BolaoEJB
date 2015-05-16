@@ -49,7 +49,7 @@ public class Aposta implements AbstractEntity {
     @Column(name = "DATA_APOSTA")
     private Date dataAposta;    
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "aposta")    
-    private List<ApostaResultado> apostaEquipePartidaList;
+    private List<ApostaResultado> apostaResultadoList;
     @ManyToOne
     @JoinColumn(name = "ID_USUARIO", referencedColumnName = "ID_USUARIO")
     private Usuario usuario;
@@ -72,12 +72,12 @@ public class Aposta implements AbstractEntity {
     }
 
     @XmlTransient
-    public List<ApostaResultado> getApostaEquipePartidaList() {
-        return apostaEquipePartidaList;
+    public List<ApostaResultado> getApostaResultadoList() {
+        return apostaResultadoList;
     }
 
-    public void setApostaEquipePartidaList(List<ApostaResultado> apostaEquipePartidaList) {
-        this.apostaEquipePartidaList = apostaEquipePartidaList;
+    public void setApostaResultadoList(List<ApostaResultado> apostaResultadoList) {
+        this.apostaResultadoList = apostaResultadoList;
     }
 
     public Usuario getUsuario() {

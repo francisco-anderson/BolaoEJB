@@ -45,9 +45,9 @@ public class Equipe implements AbstractEntity {
     private Long id;
     private String nome;    
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "equipe")    
-    private List<Resultado> equipePartidaList;   
+    private List<Resultado> resultadoList;   
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,mappedBy = "equipe")    
-    private List<ApostaResultado> apostaEquipePartidaList;    
+    private List<ApostaResultado> apostaResultadoList;    
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, mappedBy = "equipe")    
     private List<PontuacaoEquipe> pontuacaoEquipeList;
     @ManyToOne
@@ -72,21 +72,21 @@ public class Equipe implements AbstractEntity {
     }
 
     @XmlTransient
-    public List<Resultado> getEquipePartidaList() {
-        return equipePartidaList;
+    public List<Resultado> getResultadoList() {
+        return resultadoList;
     }
 
-    public void setEquipePartidaList(List<Resultado> equipePartidaList) {
-        this.equipePartidaList = equipePartidaList;
+    public void setResultadoList(List<Resultado> resultadoList) {
+        this.resultadoList = resultadoList;
     }
 
     @XmlTransient
-    public List<ApostaResultado> getApostaEquipePartidaList() {
-        return apostaEquipePartidaList;
+    public List<ApostaResultado> getApostaResultadoList() {
+        return apostaResultadoList;
     }
 
-    public void setApostaEquipePartidaList(List<ApostaResultado> apostaEquipePartidaList) {
-        this.apostaEquipePartidaList = apostaEquipePartidaList;
+    public void setApostaResultadoList(List<ApostaResultado> apostaResultadoList) {
+        this.apostaResultadoList = apostaResultadoList;
     }
 
     @XmlTransient

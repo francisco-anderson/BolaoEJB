@@ -60,9 +60,9 @@ public class Partida implements AbstractEntity {
     private String localPartida;
     private String status;    
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,mappedBy = "partida")    
-    private List<ApostaResultado> apostaEquipePartidaList;    
+    private List<ApostaResultado> apostaResultadoList;    
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,mappedBy = "partida")    
-    private List<Resultado> equipePartidaList;
+    private List<Resultado> resultadoList;
     @ManyToOne
     @JoinColumn(name = "ID_CAMPEONATO", referencedColumnName = "ID_CAMPEONATO")
     private Campeonato campeonato;
@@ -125,21 +125,21 @@ public class Partida implements AbstractEntity {
     }
 
     @XmlTransient
-    public List<ApostaResultado> getApostaEquipePartidaList() {
-        return apostaEquipePartidaList;
+    public List<ApostaResultado> getApostaResultadoList() {
+        return apostaResultadoList;
     }
 
-    public void setApostaEquipePartidaList(List<ApostaResultado> apostaEquipePartidaList) {
-        this.apostaEquipePartidaList = apostaEquipePartidaList;
+    public void setApostaResultadoList(List<ApostaResultado> apostaResultadoList) {
+        this.apostaResultadoList = apostaResultadoList;
     }
 
     @XmlTransient
-    public List<Resultado> getEquipePartidaList() {
-        return equipePartidaList;
+    public List<Resultado> getResultadoList() {
+        return resultadoList;
     }
 
-    public void setEquipePartidaList(List<Resultado> equipePartidaList) {
-        this.equipePartidaList = equipePartidaList;
+    public void setResultadoList(List<Resultado> resultadoList) {
+        this.resultadoList = resultadoList;
     }
 
     public Campeonato getCampeonato() {
