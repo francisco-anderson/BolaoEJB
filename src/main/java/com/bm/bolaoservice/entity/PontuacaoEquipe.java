@@ -5,6 +5,7 @@
  */
 package com.bm.bolaoservice.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -44,10 +45,10 @@ public class PontuacaoEquipe implements AbstractEntity {
     private Integer empates;
     private Integer golspros;
     private Integer golscontras;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "ID_EQUIPE",referencedColumnName = "ID_EQUIPE")
     private Equipe equipe;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "ID_CAMPEONATO", referencedColumnName = "ID_CAMPEONATO")
     private Campeonato campeonato;
 

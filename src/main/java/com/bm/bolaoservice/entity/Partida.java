@@ -63,7 +63,7 @@ public class Partida implements AbstractEntity {
     private List<ApostaResultado> apostaResultadoList;    
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,mappedBy = "partida")    
     private List<Resultado> resultadoList;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "ID_CAMPEONATO", referencedColumnName = "ID_CAMPEONATO")
     private Campeonato campeonato;
 

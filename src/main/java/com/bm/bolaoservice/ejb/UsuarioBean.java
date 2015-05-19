@@ -8,6 +8,7 @@ package com.bm.bolaoservice.ejb;
 import com.bm.bolaoservice.dao.UsuarioDAO;
 import com.bm.bolaoservice.entity.Usuario;
 import java.util.List;
+import java.util.Objects;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -43,12 +44,12 @@ public class UsuarioBean implements UsuarioRemote {
     }
 
     @Override
-    public Usuario novoUsuario(Usuario usuario) {
+    public String novoUsuario(Usuario usuario) {
         UsuarioDAO dao = new UsuarioDAO(em);
         if (dao.consultarUsuarioEmail(usuario.getEmail()) != null) {
-            return null;
+            return "E-mail já Cadastrado";
         }
-        return dao.save(usuario);
+        return "OK";
     }
 
     @Override
@@ -56,5 +57,24 @@ public class UsuarioBean implements UsuarioRemote {
         UsuarioDAO dao = new UsuarioDAO(em);
         return dao.save(usuario);
     }
+
+    @Override
+    public String editarUsuario(Usuario usuario) {
+        UsuarioDAO dao = new UsuarioDAO(em);
+        Usuario user = dao.consultarUsuarioEmail(usuario.getEmail());
+        if(user==null){
+           dao.save(usuario);
+           return "OK";                
+        } else {
+             if(Objects.equals(user.getId(), usuario.getId())){
+                dao.save(usuario);
+                return "OK";
+            } else {
+                return "E-mail já cadastrado";
+            }
+        }
+    }
+    
+    
 
 }

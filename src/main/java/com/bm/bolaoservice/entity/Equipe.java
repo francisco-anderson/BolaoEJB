@@ -32,7 +32,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Equipe.findAll", query = "SELECT e FROM Equipe e"),
     @NamedQuery(name = "Equipe.findByIdEquipe", query = "SELECT e FROM Equipe e WHERE e.id = :idEquipe"),
     @NamedQuery(name = "Equipe.findByNome", query = "SELECT e FROM Equipe e WHERE UPPER(e.nome) LIKE :nome ORDER BY e.nome ASC"),
-    @NamedQuery(name = "Equipe.findEquipeByCampeonato", query = "SELECT DISTINCT e FROM Equipe e INNER JOIN E.equipePartidaList as EP INNER JOIN EP.partida AS p WHERE p.campeonato.id = :id ORDER BY e.nome ASC"),
+    @NamedQuery(name = "Equipe.findEquipeByCampeonato", query = "SELECT DISTINCT e FROM Equipe e INNER JOIN E.resultadoList as EP INNER JOIN EP.partida AS p WHERE p.campeonato.id = :id ORDER BY e.nome ASC"),
     @NamedQuery(name = "Equipe.findByUsuario", query = "SELECT e FROM Equipe e WHERE e.usuario.id = :idUsuario"),
     @NamedQuery(name = "Equipe.findEquipeByPontuacaoPorGrupo",query = "SELECT e FROM Equipe e INNER JOIN e.pontuacaoEquipeList AS pe INNER JOIN pe.campeonato AS p WHERE p.usuario.id = :idUsuario AND p.id = :idCampeonato AND e.id IN (SELECT n.equipe.id FROM Resultado n INNER JOIN n.partida as o WHERE o.tipo = :tipo) ")})
 public class Equipe implements AbstractEntity {
@@ -50,7 +50,7 @@ public class Equipe implements AbstractEntity {
     private List<ApostaResultado> apostaResultadoList;    
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, mappedBy = "equipe")    
     private List<PontuacaoEquipe> pontuacaoEquipeList;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "ID_USUARIO", referencedColumnName = "ID_USUARIO") 
     private Usuario usuario;
 

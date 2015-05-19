@@ -23,7 +23,9 @@ public interface UsuarioRemote extends Serializable {
 
     public Usuario consultarLogin(String email, String senha);
 
-    public Usuario novoUsuario(Usuario usuario);
+    public String novoUsuario(Usuario usuario);
+    
+    public String editarUsuario(Usuario usuario);
     
     public Usuario salvar(Usuario usuario);
 

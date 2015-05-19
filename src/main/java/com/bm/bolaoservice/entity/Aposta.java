@@ -50,7 +50,7 @@ public class Aposta implements AbstractEntity {
     private Date dataAposta;    
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "aposta")    
     private List<ApostaResultado> apostaResultadoList;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "ID_USUARIO", referencedColumnName = "ID_USUARIO")
     private Usuario usuario;
 
