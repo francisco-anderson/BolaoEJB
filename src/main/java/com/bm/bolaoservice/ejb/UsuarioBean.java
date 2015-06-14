@@ -49,6 +49,7 @@ public class UsuarioBean implements UsuarioRemote {
         if (dao.consultarUsuarioEmail(usuario.getEmail()) != null) {
             return "E-mail já Cadastrado";
         }
+        dao.save(usuario);
         return "OK";
     }
 
